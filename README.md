@@ -1,2 +1,1 @@
-# coding
-Various coding projects for demo purposes
+blog.matthewhanna.net
