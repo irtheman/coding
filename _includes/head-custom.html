@@ -7,4 +7,12 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 
+{% for js in page.js-list %}
+  <script src="{{ js }}"></script>
+{% endfor %}
+
+{% for css in page.css-list %}
+  <link href="{{ css }}" rel="stylesheet">
+{% endfor %}
+
 <!-- end custom head snippets -->
