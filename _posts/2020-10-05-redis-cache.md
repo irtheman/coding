@@ -3,7 +3,9 @@ layout: post
 title:  "Redis Cache"
 date:   2020-10-05 15:46:25 -0400
 ---
-# What is Redis Cache
+Redis, which stands for **Re**mote **Di**ctionary **S**erver, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.
+
+# What is Redis Cache?
 
 Redis is an open-source distributed in-memory data store. We can use it as a distributed no-SQL database, as a distributed in-memory cache, or a pub/sub messaging engine. The most popular use case appears to be using it as a distributed in-memory caching engine. Redis supports a variety of data types including strings, hashes, lists, and ordered / unordered sets. Strings and hashes are the most common means for caching. There is even support for geo-spatial indexes where information can be stored by latitude and longitude. There is also a command line interface called redis-cli.exe with all the Redis features easily accessible to IT / admin. There are also a number of asynchronous versions of almost every method for accessing Redis.
 
