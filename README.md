@@ -1,1 +1,3 @@
-blog.matthewhanna.net
+coding-blog
+
+<https://blog.matthewhanna.net>
