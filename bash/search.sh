@@ -12,7 +12,7 @@ TEMPFILE="/tmpfs/temp-patterns.txt"
 usage() {
     echo "Usage: $0 [option] <directory>"
     echo "Options:"
-    echo "  -s | --swap      Swap mode (switch columns in private-patterns.txt)"
+    echo "  -s | --swap      Search for redacted information"
     exit 1
 }
 

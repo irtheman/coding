@@ -13,7 +13,7 @@ EXEXT="gitignore,pdf"
 usage() {
     echo "Usage: $0 [option] <directory>"
     echo "Options:"
-    echo "  -s | --swap      Swap mode (switch columns in private-patterns.txt)"
+    echo "  -s | --swap      Replace redacted with private"
     exit 1
 }
 
