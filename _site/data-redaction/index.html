@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Data Redaction | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Data Redaction" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using data redaction on all my repositories." />
+<meta property="og:description" content="Using data redaction on all my repositories." />
+<link rel="canonical" href="http://localhost:4000/data-redaction/" />
+<meta property="og:url" content="http://localhost:4000/data-redaction/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-26T15:03:25-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Redaction" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-26T15:03:25-04:00","datePublished":"2025-08-26T15:03:25-04:00","description":"Using data redaction on all my repositories.","headline":"Data Redaction","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/data-redaction/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/data-redaction/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  data-redaction">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Data Redaction
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">2 min read</span>
+
+    <time class="page-date dt-published" datetime="2025-08-26T15:03:25-04:00"><a class="u-url" href="">August 26, 2025</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#bash" title="Pages tagged bash" rel="tag">bash</a></li>
+  </ul>
+
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <p>Using data redaction on all my repositories.</p>
+
+<h1 id="data-redaction">Data Redaction</h1>
+
+<p>The term for removing private information from code is data redaction. This technique involves masking or obscuring sensitive data within a document or dataset to protect personally identifiable information (PII) and other confidential data. Additionally, the process of hiding or removing sensitive information from documents is referred to as document redaction.</p>
+
+<h3 id="some-traditional-methods">Some Traditional Methods</h3>
+<p>Let’s say we have a docker compose for a complex set of services or maybe a python program for running an AI model. We want to share the code but, we don’t want to share our local information like the internal servers being used, their ports, the website domains, user names, passwords, contact information, or more.</p>
+
+<p>I won’t bother explaining docker compose yaml files and their .env and secret files but they are the  best solutions. For docker compose one would use the .env and secret files that are then placed in the .gitignore file so they don’t get deployed. The .env, though in the .gitignore file, can be replaced with an uploadable example like ‘example.env’ so the one using the code can see what they need to provide. The same applies for the secret files, the secret file can have an uploadable replacement like ‘example.db_root_password.txt’. Documentation is very important.</p>
+
+<p>For an application, like for python, one might use environment variables and document what they should look like so the one using the code can know what they need to complete. A simple script to launch the python application can include those environment variables like this but excluding the launching script using .gitignore…</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># File: launch.sh</span>
+
+<span class="nv">GPU_BASE_URL</span><span class="o">=</span>”MyPc1.local”
+<span class="nv">GPU_BASE_PORT</span><span class="o">=</span>”5005”
+
+python ./my-ai-script.py
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># File: .gitignore</span>
+.env
+secrets/
+launch.sh
+</code></pre></div></div>
+
+<h3 id="my-custom-cover-all-redaction-method">My Custom Cover-All Redaction Method</h3>
+<p>I personally have been using a custom bash script that just goes through every folder and file in the repository replacing anything private with something else. The whole redaction process can be undone using the same script. All the private information is kept in a ‘private-information.txt’ file that is never in any repository. This way all the private information is in one place and before any commit, using a git pre-commit hook, everything gets redacted.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># File: .git/hooks/pre-commit</span>
+
+<span class="nv">count</span><span class="o">=</span><span class="si">$(</span>/scripts/search.sh | <span class="nb">wc</span> <span class="nt">-l</span><span class="si">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$count</span><span class="s2">"</span> <span class="nt">-gt</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  /scripts/replace.sh ../../
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>The information used by search.sh and replace.sh is in the ‘private-information.txt’ file. All search and replace goes in the order of the longer string to be replaced down to the smaller string to be replaced so the longer one gets matched first.</p>
+
+<p>One will notice that I am using an equal sign as a separator in this example. If one wants to use this script, just use a character not likely to be redacted like a whitespace or control character i.e. \r, \n, \v, etc</p>
+
+<p><a name="private-information"></a>
+Here is an example of what the private-information.txt file would look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>amigo.lan=MyPc1.local
+hermano.lan=MyPc2.local
+omigo=MyPc1
+hermano=MyPc2
+MySecretPassword1=&lt;password&gt;
+MySecretPassword2=&lt;Password&gt;
+MySecretPassword3=&lt;Pwd&gt;
+MyUserName=&lt;login&gt;
+me@mywebsite.net=user@domain.tld
+contact@mywebsite.net=name@domain.tld
+support@mywebsite.net=id@domain.tld
+blog.mywebsite.net=sub.domain.tld
+photos.mywebsite.net=immich.domain.tld
+nc.mywebsite.net=nextcloud.domain.tld
+mywebsite.net=domain.tld
+</code></pre></div></div>
+
+<p>Pretty simple, right? The whole point is to always cover anything that needs to be redacted with the ability to undo the redaction when needed. Let’s say one has all their repositories in one ‘repos’ folder. Every repository can then be kept redacted by running this script at any time.</p>
+
+<p>What are these search and replace scripts I’m talking about? See ya in the next post!</p>
+
+<p>Post: <a href="https://blog.matthewhanna.net/data-redaction-search">Search For Redacted Data</a></p>
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Data+Redaction%20http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=Data+Redaction&url=http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/data-redaction-search/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> Data Redaction - Search
+
+      </span>
+    </a>
+  
+
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

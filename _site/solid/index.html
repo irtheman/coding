@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>SOLID | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="SOLID" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin" />
+<meta property="og:description" content="SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin" />
+<link rel="canonical" href="http://localhost:4000/solid/" />
+<meta property="og:url" content="http://localhost:4000/solid/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-07T16:28:25-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SOLID" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-10-07T16:28:25-04:00","datePublished":"2020-10-07T16:28:25-04:00","description":"SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin","headline":"SOLID","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/solid/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/solid/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  solid">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">SOLID
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">6 min read</span>
+
+    <time class="page-date dt-published" datetime="2020-10-07T16:28:25-04:00"><a class="u-url" href="">October 7, 2020</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <p>SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin</p>
+
+<ul id="markdown-toc">
+  <li><a href="#what-is-solid" id="markdown-toc-what-is-solid">What is SOLID?</a></li>
+  <li><a href="#single-responsibility-principle" id="markdown-toc-single-responsibility-principle">Single Responsibility Principle</a></li>
+  <li><a href="#open--closed-principle" id="markdown-toc-open--closed-principle">Open / Closed Principle</a></li>
+  <li><a href="#liskov-substitution-principle" id="markdown-toc-liskov-substitution-principle">Liskov Substitution Principle</a></li>
+  <li><a href="#interface-segregation-principle" id="markdown-toc-interface-segregation-principle">Interface Segregation Principle</a></li>
+  <li><a href="#dependency-inversion-principle" id="markdown-toc-dependency-inversion-principle">Dependency Inversion Principle</a></li>
+</ul>
+
+<h2 id="what-is-solid">What is SOLID?</h2>
+<p>SOLID is an acronym for the 5 basic principles of good software architecture:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Letter</th>
+      <th style="text-align: left">Abbr</th>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Basic Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">S</td>
+      <td style="text-align: left">SRP</td>
+      <td style="text-align: left">Single Responsibility Principle</td>
+      <td style="text-align: left">A class should have only a single responsibility, that is, it only has 1 specific task to fulfill.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">O</td>
+      <td style="text-align: left">OCP</td>
+      <td style="text-align: left">Open / Closed Principle</td>
+      <td style="text-align: left">A class that needs a new behavior should be extended and not modified.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">L</td>
+      <td style="text-align: left">LSP</td>
+      <td style="text-align: left">Liskov Substitution Principle</td>
+      <td style="text-align: left">A class should be replaceable by a subclass that can change how a task is completed but it doesn’t damage the operation of the dependent classes. In other words, a parent class should be able to refer to child objects seamlessly during runtime via polymorphism.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">I</td>
+      <td style="text-align: left">ISP</td>
+      <td style="text-align: left">Interface Segregation Principle</td>
+      <td style="text-align: left">Instead of one huge multi-purpose interface one should have multiple specific interfaces. A client should not be forced to code for an interface they do not need.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">D</td>
+      <td style="text-align: left">DIP</td>
+      <td style="text-align: left">Dependency Inversion Principle</td>
+      <td style="text-align: left">Implementation should depend on abstraction rather than some concrete solution. High level objects should not have to depend on low level objects; they only need to know the feature is implemented by something.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><i class="fas fa-info-circle" aria-hidden="true"></i> Polymorphism allows the expression of some sort of contract, with potentially many types implementing that contract (whether through class inheritance or not) in different ways, each according to their own purpose. Code <em>using</em> that contract should not have to care about which implementation is involved, only that the contract will be obeyed.</p>
+</blockquote>
+
+<h2 id="single-responsibility-principle">Single Responsibility Principle</h2>
+<p>SRP keeps classes simple, easy to maintain and minifies the effects of any minor changes. A class should only have one responsibility and not multiple. This can sound confusing at first; someone will likely bring up something like a view model or controller but that, in itself, has a single responsibility to manage other classes that themselves have a very simple single responsibility.</p>
+
+<p><strong>Broken - Writing to logfile is not job of Aggregator class.</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>Fixed</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">Logger</span> <span class="n">log</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Logger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Logger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="open--closed-principle">Open / Closed Principle</h2>
+
+<p>Again, OCP keeps classes simple, easy to maintain and minifies the impacts of changes to the code. OCP means that the class should not be modified (i.e. it is closed) but it can be extended (i.e. it is open). A developer will often say, “Hey, I need to add this new capability to this class for this specific case.” That modification can be reckless. One should keep the original class intact so the code relying on that original class isn’t broken. To add that new functionality the class basically has a new task and thus needs to change; that change should be an extension via inheritance.</p>
+
+<p><strong>Broken</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="kt">int</span> <span class="n">DroneType</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">public</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">DroneType</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">DroneType</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">2.0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">DroneType</span> <span class="p">==</span> <span class="m">2</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">32.0</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Fixed (Polymorphism Inheritance)</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">virtual</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">SpyDrone</span> <span class="p">:</span> <span class="n">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">override</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="k">base</span><span class="p">.</span><span class="nf">ArrivalTime</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">2.0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">AttackDrone</span> <span class="p">:</span> <span class="n">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">override</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="k">base</span><span class="p">.</span><span class="nf">ArrivalTime</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">32.0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="liskov-substitution-principle">Liskov Substitution Principle</h2>
+
+<p>LSP keeps the overall program working as it was designed though a backing class might have been swapped out for another implementation. A good example of LSP in use is the Mock object often used in Unit Testing. The LSP object can be based off of interfaces or an abstract class as long as the object instance doesn’t break the calling code.</p>
+
+<p><strong>Example - Substituting a logger class doesn’t break Aggregator</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="c1">// private ILogger log = new FileLogger();</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">ILogger</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">FileLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConsoleLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="interface-segregation-principle">Interface Segregation Principle</h2>
+
+<p>ISP helps protect clients from developers damaging interfaces which are normally “contracts” with other clients. Interfaces used by other clients, including actual people or classes throughout your code repositories, should not change because that change could break the client’s software implementation. There is also the tendency to put too much stuff into an interface which can almost be seen as the same as violating the Single Responsibility Principle though from an interface perspective. Requirements matter and sometimes it is a good idea to break up a proposed interface to provide more flexibility.</p>
+
+<p><strong>Original</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Add entity to database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Broken</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">);</span>
+  <span class="n">Entity</span> <span class="nf">Read</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Broken!</span>
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Add entity to database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Fixed</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">IDatabaseV1</span> <span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="c1">// Has Add Method.</span>
+  <span class="n">Entity</span> <span class="nf">Read</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ClientWithRead</span><span class="p">:</span> <span class="n">IDatabaseV1</span><span class="p">,</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">Client</span> <span class="n">obj</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Client</span><span class="p">();</span>
+    <span class="n">obj</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">public</span> <span class="n">Entity</span> <span class="nf">Read</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="c1">// Read from database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Add entity to database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Results...</span>
+<span class="n">IDatabase</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Client</span><span class="p">();</span> <span class="c1">// Previous clients happy!</span>
+<span class="n">a</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
+<span class="n">IDatabaseV1</span> <span class="n">b</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ClientWithRead</span><span class="p">();</span> <span class="c1">// New client requirements.</span>
+<span class="n">b</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
+<span class="n">entity</span> <span class="p">=</span> <span class="n">b</span><span class="p">.</span><span class="nf">Read</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="dependency-inversion-principle">Dependency Inversion Principle</h2>
+
+<p>Instead of hard coding a class to determine what component should be used internally flexibility should be built in. With DIP we want to invert, or delegate, the responsibility of that swappable component used internally. As an 
+example, instead of using a bunch of IF statements to choose your logging mechanism (that’s a no), or some flag in your logging class (that’s a no) or just becoming inflexible and not allowing for this kind of change one should use Dependency Inversion.</p>
+
+<p><strong>Broke 1</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">Logger</span> <span class="n">log</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Logger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">logToFile</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">.</span><span class="n">LogToFile</span> <span class="p">=</span> <span class="n">logToFile</span><span class="p">;</span>
+      <span class="n">log</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Logger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="kt">bool</span> <span class="n">LogToFile</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">LogToFile</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Broke 2</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log1</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">FileLogger</span><span class="p">();</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log2</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">logToFile</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">logToFile</span><span class="p">)</span>
+        <span class="n">log1</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+      <span class="k">else</span>
+        <span class="n">log2</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">ILogger</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">FileLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConsoleLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Fixed</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="n">ILogger</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">log</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">logToFile</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">?.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">ILogger</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">FileLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConsoleLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage:</span>
+<span class="n">Aggregator</span> <span class="n">agg1</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="k">new</span> <span class="nf">FileLogger</span><span class="p">());</span>
+<span class="n">Aggregator</span> <span class="n">agg2</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">());</span>
+</code></pre></div></div>
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fsolid%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=SOLID%20http%3A%2F%2Flocalhost%3A4000%2Fsolid%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fsolid%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=SOLID&url=http%3A%2F%2Flocalhost%3A4000%2Fsolid%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/cqrs/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> CQRS
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/json-schema/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        JSON Schema
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

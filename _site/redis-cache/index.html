@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Redis Cache | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Redis Cache" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Redis, which stands for Remote Dictionary Server, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue." />
+<meta property="og:description" content="Redis, which stands for Remote Dictionary Server, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue." />
+<link rel="canonical" href="http://localhost:4000/redis-cache/" />
+<meta property="og:url" content="http://localhost:4000/redis-cache/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-05T15:46:25-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Redis Cache" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-10-05T15:46:25-04:00","datePublished":"2020-10-05T15:46:25-04:00","description":"Redis, which stands for Remote Dictionary Server, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.","headline":"Redis Cache","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/redis-cache/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/redis-cache/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  redis-cache">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Redis Cache
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">5 min read</span>
+
+    <time class="page-date dt-published" datetime="2020-10-05T15:46:25-04:00"><a class="u-url" href="">October 5, 2020</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <p>Redis, which stands for <strong>Re</strong>mote <strong>Di</strong>ctionary <strong>S</strong>erver, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.</p>
+
+<h1 id="what-is-redis-cache">What is Redis Cache?</h1>
+
+<p>Redis is an open-source distributed in-memory data store. We can use it as a distributed no-SQL database, as a distributed in-memory cache, or a pub/sub messaging engine. The most popular use case appears to be using it as a distributed in-memory caching engine. Redis supports a variety of data types including strings, hashes, lists, and ordered / unordered sets. Strings and hashes are the most common means for caching. There is even support for geo-spatial indexes where information can be stored by latitude and longitude. There is also a command line interface called redis-cli.exe with all the Redis features easily accessible to IT / admin. There are also a number of asynchronous versions of almost every method for accessing Redis.</p>
+
+<h1 id="installing-redis-on-windows-10">Installing Redis On Windows 10</h1>
+
+<p>Get the MSI binary from here: <a href="https://github.com/microsoftarchive/redis/releases">https://github.com/microsoftarchive/redis/releases</a></p>
+
+<p>Right now, as of 10/5/2020, we are using Redis-x64-3.0.504.msi. During installation all defaults are fine with one exception: always check "Add the Redis installation folder to the PATH environment variable".</p>
+
+<p><img src="/images/RedisPrompt.png" alt="" /></p>
+
+<p>Once Redis is installed there are some adjustments that may need to be made if the defaults are not sufficient. Specifically, if a password is required, the number of databases must change, a cluster is desired, TLS/SSL is needed or there is a port change then it will be necessary to edit the redis.windows-service.conf file found in the Redis installation folder:</p>
+
+<ul>
+  <li>To change the port simply search for "port" and change the port number. The default is 6379.</li>
+  <li>To change the number of databases search for "databases" and change the count. The default is 16.</li>
+  <li>To change the password search for "requirepass" and remove the comment while setting a proper password. The default is none.</li>
+  <li>To enable cluster search for "cluster-enabled" and start from there. The default is false.</li>
+</ul>
+
+<h1 id="installing-redis-client-in-visual-studio">Installing Redis Client in Visual Studio</h1>
+
+<p>There are various Redis clients available (<a href="https://redis.io/clients#c">https://redis.io/clients#c</a>) but StackExchange.Redis is the C# client recommended by RedisLabs due to its high performance and common usage (<a href="https://docs.redislabs.com/latest/rs/references/client_references/client_csharp/">https://docs.redislabs.com/latest/rs/references/client_references/client_csharp/</a>).</p>
+
+<p>For the project that will be using Redis, right-click and select "Manage Nuget Packages…". Search for and install "StackExchange.Redis". Alternatively, you can also use the Package Manager Console to run "Install-Package StackExchange.Redis".</p>
+
+<p>The documentation for StackExchange.Redis can be found on github: <a href="https://stackexchange.github.io/StackExchange.Redis/">https://stackexchange.github.io/StackExchange.Redis/</a></p>
+
+<h1 id="accessing-redis-using-stackexchangeredis">Accessing Redis Using StackExchange.Redis</h1>
+
+<p>A using statement is required to reference StackExchange.Redis</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Using</span> <span class="n">StackExchange</span><span class="p">.</span><span class="n">Redis</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>To acquire access to the Redis server a ConnectionMultiplexer Connection is required:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ConnectionMultiplexer</span> <span class="n">connect</span> <span class="p">=</span> <span class="n">ConnectionMultiplexer</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="s">"hostname:port,password=password"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The ConnectionMultiplexer should not be created per operation. Create it once and reuse it.</p>
+
+<p>With the connection to Redis one needs access to the Redis database where caching will take place:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">IDatabase</span> <span class="n">conn</span> <span class="p">=</span> <span class="n">muxer</span><span class="p">.</span><span class="nf">GetDatabase</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>The default database is 0. The default provides up to 16. The number can be changed in the config file. One idea might be to use a separate database per Tenant to keep things separated.</p>
+
+<h1 id="configuration-of-stackexchangeredis">Configuration of StackExchange.Redis</h1>
+
+<p>As seen above, the ConnectionMultiplexer can be initialized with a parameter string. The many options can be found in the documentation (<a href="https://stackexchange.github.io/StackExchange.Redis/Configuration">https://stackexchange.github.io/StackExchange.Redis/Configuration</a>). Each option is simply separated by commas like this:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">conn</span> <span class="p">=</span> <span class="n">ConnectionMultiplexer</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="s">"redis0:6380,redis1:6380,allowAdmin=true"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>It starts with the main Redis server, then any cluster servers that the client should know about, and then other options follow. AllowAdmin isn't really recommended though it does expand on what the Redis client can do.</p>
+
+<p>Another configuration option is to convert the parameter string into a ConfigurationOptions object:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ConfigurationOptions</span> <span class="n">options</span> <span class="p">=</span> <span class="n">ConfigurationOptions</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="n">configString</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Or one can simply go straight to using the ConfigurationOptions object directly:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ConfigurationOptions</span> <span class="n">config</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConfigurationOptions</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">KeepAlive</span> <span class="p">=</span> <span class="m">180</span><span class="p">,</span>
+   <span class="n">Password</span> <span class="p">=</span> <span class="s">"changeme"</span>
+ <span class="p">};</span>
+</code></pre></div></div>
+
+<h1 id="caching-with-stackexchangeredis">Caching with StackExchange.Redis</h1>
+
+<p>Once you have a ConnectionMultiplexer you can then acquire access to a database. Any will do but database 0 is default. The database object provides the caching options. There are various means of caching in Redis but the simplest and most useful for TraQ7 was to use the String methods, StringSet and StringGet, like the following:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Store and re-use ConnectionMultiplexer. Dispose only when no longer used.</span>
+ <span class="n">ConnectionMultiplexer</span> <span class="n">conn</span> <span class="p">=</span> <span class="n">ConnectionMultiplexer</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">);</span>
+ <span class="n">IDatabase</span> <span class="n">db</span> <span class="p">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">GetDatabase</span><span class="p">();</span>
+ <span class="p">...</span>
+ <span class="kt">string</span> <span class="k">value</span> <span class="p">=</span> <span class="s">"Some Value"</span><span class="p">;</span>
+ <span class="n">db</span><span class="p">.</span><span class="nf">StringSet</span><span class="p">(</span><span class="s">"key1"</span><span class="p">,</span> <span class="k">value</span><span class="p">);</span>
+ <span class="p">...</span>
+ <span class="kt">string</span> <span class="k">value</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="nf">StringGet</span><span class="p">(</span><span class="s">"key1"</span><span class="p">);</span>
+ <span class="p">...</span>
+</code></pre></div></div>
+
+<p>Storing and retrieving a string value is easy and was the earliest primary function of Redis for caching.</p>
+
+<h1 id="searching-redis-keys">Searching Redis Keys</h1>
+
+<p>Redis has KEY and SCAN keywords in the CLI for looking up database keys. KEY is typically not recommended in production, but SCAN is considered safe. The StackExchange.Redis client makes the decision on which Redis command to execute for best performance. KEY / SCAN supports glob-style pattern matching which is not the same as RegEx. Glob-style patterns look more like a Linux file search that includes the following patterns (use ' for escape):</p>
+
+<ul>
+  <li>h?llo matches hello, hallo, hxllo, etc</li>
+  <li>h*llo matches hllo, heeeeello, etc.</li>
+  <li>h[ae]llo matches hello and hallo but not anything else like hillo</li>
+  <li>h[^e]llo matches hallo, hbllo, etc but not hello</li>
+  <li>h[a-c]llo matches hallo, hbllo and hcllo</li>
+</ul>
+
+<p>To search for a specific key(s) you need a server object representing the host or maintenance Redis instance. Then a search based on pattern matching can be applied:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">string</span> <span class="n">pattern</span> <span class="p">=</span> <span class="s">"DataTable"</span>
+ <span class="kt">var</span> <span class="n">server</span> <span class="p">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">GetServer</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">);</span>
+ <span class="kt">var</span> <span class="n">cacheKeys</span> <span class="p">=</span> <span class="n">server</span><span class="p">.</span><span class="nf">Keys</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span><span class="s">$"\*</span><span class="p">{</span><span class="n">pattern</span><span class="p">}</span><span class="s">\*"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="deleting-redis-keys">Deleting Redis Keys</h1>
+
+<p>Keys can be deleted individually or as a whole set:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// Delete a single key</span>
+ <span class="n">Database</span><span class="p">.</span><span class="nf">KeyDelete</span><span class="p">(&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">Key1</span><span class="p">&amp;</span><span class="n">quot</span><span class="p">;);</span>
+
+ <span class="c1">// Delete all keys from database 0</span>
+ <span class="n">server</span><span class="p">.</span><span class="nf">FlushDatabase</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="serialization-of-redis-values">Serialization of Redis Values</h1>
+
+<p>StackExchange.Redis always changes all RedisValue being cached that is not a primitive datatype to a byte array. This is handled in TraQ7 Redis Caching to speed up the process by skipping calls to multiple methods. It is also necessary to specify a JSON setting to preserve all references to help prevent errors due to cycles in the objects being serialized.</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">readonly</span> <span class="n">Encoding</span> <span class="n">_encoding</span> <span class="p">=</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">;</span>
+ <span class="n">JsonSerializerSettings</span> <span class="n">_jsonSettings</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">JsonSerializerSettings</span><span class="p">()</span> <span class="p">{</span> <span class="n">PreserveReferencesHandling</span> <span class="p">=</span> <span class="n">PreserveReferencesHandling</span><span class="p">.</span><span class="n">Objects</span> <span class="p">};</span>
+ <span class="p">...</span>
+ <span class="k">private</span> <span class="kt">byte</span><span class="p">[]</span> <span class="nf">Serialize</span><span class="p">(</span><span class="kt">object</span> <span class="n">item</span><span class="p">)</span>
+ <span class="p">{</span>
+  <span class="kt">var</span> <span class="n">type</span> <span class="p">=</span> <span class="n">item</span><span class="p">?.</span><span class="nf">GetType</span><span class="p">();</span>
+  <span class="kt">var</span> <span class="n">jsonString</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">_jsonSettings</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">_encoding</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">jsonString</span><span class="p">);</span>
+ <span class="p">}</span>
+
+ <span class="k">private</span> <span class="n">T</span> <span class="n">Deserialize</span><span class="err">\</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">T</span><span class="err">\</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;(</span><span class="kt">byte</span><span class="p">[]</span> <span class="n">serializedObject</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">serializedObject</span> <span class="p">==</span> <span class="k">null</span> <span class="p">||</span> <span class="n">serializedObject</span><span class="p">.</span><span class="n">Length</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+     <span class="k">return</span> <span class="k">default</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+   <span class="kt">var</span> <span class="n">jsonString</span> <span class="p">=</span> <span class="n">_encoding</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="n">serializedObject</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">jsonString</span><span class="p">,</span> <span class="n">_jsonSettings</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="notes">Notes:</h1>
+
+<ul>
+  <li>Make cache services into Singletons at Startup (helps Redis most)</li>
+  <li>Convert serialized objects to byte arrays for faster transaction</li>
+  <li>Use JSON setting PreserveReferencesHandling = PreserveReferencesHandling.Objects to enable serializing complex objects with circular references</li>
+  <li>Redis Keys search pattern is NOT RegEx. Excluding whole words seem to not be possible.</li>
+  <li>Clear the Redis cache when any changes are made to the structure of any classes that are serialized.
+    <ul>
+      <li>Redis-cli.exe FLUSHDB</li>
+      <li>Redis-cli.exe FLUSHALL</li>
+      <li>These work inside the redis-cli client as well.</li>
+    </ul>
+  </li>
+</ul>
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fredis-cache%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Redis+Cache%20http%3A%2F%2Flocalhost%3A4000%2Fredis-cache%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fredis-cache%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=Redis+Cache&url=http%3A%2F%2Flocalhost%3A4000%2Fredis-cache%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/integrating_canvas/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> Integrating HTML5 Canvas In Jekyll
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/cqrs/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        CQRS
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

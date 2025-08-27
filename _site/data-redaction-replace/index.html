@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Data Redaction - Replace | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Data Redaction - Replace" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Replacing private or redacted information in my repositories." />
+<meta property="og:description" content="Replacing private or redacted information in my repositories." />
+<link rel="canonical" href="http://localhost:4000/data-redaction-replace/" />
+<meta property="og:url" content="http://localhost:4000/data-redaction-replace/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-26T15:01:25-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Redaction - Replace" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-08-26T15:01:25-04:00","datePublished":"2025-08-26T15:01:25-04:00","description":"Replacing private or redacted information in my repositories.","headline":"Data Redaction - Replace","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/data-redaction-replace/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/data-redaction-replace/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  data-redaction-replace">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Data Redaction - Replace
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">3 min read</span>
+
+    <time class="page-date dt-published" datetime="2025-08-26T15:01:25-04:00"><a class="u-url" href="">August 26, 2025</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#bash" title="Pages tagged bash" rel="tag">bash</a></li>
+  </ul>
+
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <p>Replacing private or redacted information in my repositories.</p>
+
+<h1 id="data-redaction-replace-script">Data Redaction Replace Script</h1>
+
+<p>It’s time to take a look at the script that will replace the private information with the redacted information. The same script can undo that switch of information making it very convenient when storing code on a remote repository without making it private. This bash script is called ‘replace.sh’ and it will search the whole folder for any private information replacing it with the redacted version.</p>
+
+<p>Please take a look at <a href="https://blog.matthewhanna.net/data-redaction#private-information">Data Redaction</a> for the ‘private-information.txt’ that will be used here.</p>
+
+<p><strong>Sample run of search.sh</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Bad run...</span>
+/scripts/replace.sh
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usage: /scripts/replace.sh [option] &lt;directory&gt;
+Options:
+  -s | --swap          Replace redacted with private
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Replace for private information with a redacted version</span>
+/scripts/replace.sh ./
+
+<span class="c"># Replace the redacted version with original private information</span>
+/scripts/replace.sh <span class="nt">-s</span> ./
+</code></pre></div></div>
+
+<p>For this script, I’m adding a bash variable while the others are just like in search.sh. They are easy to update this way. Again, please excuse the bad naming; they’ve been there for years.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># SECRETS is the file containing patterns to search for</span>
+<span class="nv">SECRETS</span><span class="o">=</span><span class="s2">"/private-information.txt"</span>
+<span class="c"># EXD is a comma-separated list of directories to exclude</span>
+<span class="nv">EXD</span><span class="o">=</span><span class="s2">"--exclude-dir={venv,.git,.vscode}"</span>
+<span class="c"># EXEXT is a comma-separated list of file extensions to exclude</span>
+<span class="nv">EXEXT</span><span class="o">=</span><span class="s2">"--exclude=*.{svg,webp,png,jpg,pdf,docx,gz,zip,tar}"</span>
+<span class="c"># SED_SCRIPT is the temporary sed script file</span>
+<span class="nv">SED_SCRIPT</span><span class="o">=</span><span class="s2">"/tmpfs/script.sed"</span>
+</code></pre></div></div>
+
+<p>This script uses the find command so we need to add the parameters to exclude the chosen directories and file extensions. I think it makes things easier to store the directories and file extensions to exclude in variables and then just generate what is needed for the find command.</p>
+
+<p>This find command will be used like this…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find ./folder <span class="nt">-type</span> f <span class="se">\(</span> <span class="o">!</span> <span class="nt">-iname</span> <span class="s2">".png"</span> <span class="o">!</span> <span class="nt">-iname</span> <span class="s2">".zip"</span> <span class="se">\)</span> <span class="o">!</span> <span class="nt">-path</span> <span class="s2">"./venv"</span> <span class="o">!</span> <span class="nt">-path</span> <span class="s2">"./.git"</span> <span class="nt">-print</span>
+</code></pre></div></div>
+
+<p>To generate the directories to be excluded the following script is used:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the exclude paths</span>
+<span class="nv">path</span><span class="o">=</span><span class="s2">""</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">','</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> fld <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$EXD</span><span class="s2">"</span>
+<span class="k">for </span>d <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">fld</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+  </span><span class="nv">path</span><span class="o">=</span><span class="s2">"</span><span class="nv">$path</span><span class="s2"> ! -path ""./</span><span class="k">${</span><span class="nv">d</span><span class="k">}</span><span class="s2">/*"""</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>To generate the file extensions to be excluded the following script is then used:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the exclude extensions</span>
+<span class="nv">extension</span><span class="o">=</span><span class="s2">"</span><span class="se">\(</span><span class="s2"> "</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">','</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> ext <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$EXEXT</span><span class="s2">"</span>
+<span class="k">for </span>e <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">ext</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+  </span><span class="nv">extension</span><span class="o">=</span><span class="s2">"</span><span class="nv">$extension</span><span class="s2"> ! -iname "".</span><span class="k">${</span><span class="nv">e</span><span class="k">}</span><span class="s2">"""</span>
+<span class="k">done
+</span>extension+<span class="o">=</span><span class="s2">" </span><span class="se">\)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>This script also is going to use the sed command. Using the sed script file is best in this situation but the file has to be generated. The sed command will make changes directly to the target file while making a backup before making that change.</p>
+
+<p>The sed command will be used like this…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># SED script file is, per line, like this...</span>
+<span class="c"># s/SEARCH/REPLACE/g</span>
+
+<span class="nb">sed</span> <span class="nt">--in-place</span><span class="o">=</span>.bak <span class="nt">--file</span><span class="o">=</span>/tmpfs/script.sed this-file.txt
+</code></pre></div></div>
+
+<p>To generate the SED script file we have to read the ‘private-information.txt’ and transform it taking into consideration the swap parameter. SED does not do non-regex substitutions so there will be escaping added for both private and redacted.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the sed script from the secrets file</span>
+<span class="nb">mapfile</span> <span class="nt">-t</span> lines &lt; <span class="nv">$SECRETS</span>
+
+<span class="k">for </span>line <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">lines</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+  </span><span class="nv">IFS</span><span class="o">=</span><span class="s1">'='</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> array <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span>
+
+  <span class="c"># Swapped or not all entries must be escaped</span>
+  <span class="k">if</span> <span class="nv">$swap</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">escaped_lhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[1]//[][\\\/.^\</span><span class="nv">$*</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+    <span class="nv">escaped_rhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[0]//[\\\/&amp;</span><span class="s1">$'</span><span class="se">\n</span><span class="s1">'</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+  <span class="k">else
+    </span><span class="nv">escaped_lhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[0]//[][\\\/.^\</span><span class="nv">$*</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+    <span class="nv">escaped_rhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[1]//[\\\/&amp;</span><span class="s1">$'</span><span class="se">\n</span><span class="s1">'</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+  <span class="k">fi
+  </span><span class="nv">escaped_rhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">escaped_rhs</span><span class="p">%\\</span><span class="s1">$'</span><span class="se">\n</span><span class="s1">'</span><span class="k">}</span><span class="s2">"</span>
+
+  <span class="nb">echo</span> <span class="s2">"s/</span><span class="k">${</span><span class="nv">escaped_lhs</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">escaped_rhs</span><span class="k">}</span><span class="s2">/g"</span>
+<span class="k">done</span> <span class="o">&gt;</span> <span class="nv">$SED_SCRIPT</span>
+</code></pre></div></div>
+
+<p>Next, we just need to get the list of files that can be modified…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Find files, filter for ASCII, and create an array of files</span>
+<span class="nb">command</span><span class="o">=</span><span class="s2">"find </span><span class="nv">$folder</span><span class="s2"> -type f </span><span class="nv">$extension</span><span class="s2"> </span><span class="nv">$path</span><span class="s2"> -print"</span>
+<span class="nv">results</span><span class="o">=</span><span class="si">$(</span><span class="nb">eval</span> <span class="nv">$command</span> | xargs file | <span class="nb">grep </span>ASCII | <span class="nb">cut</span> <span class="nt">-d</span>: <span class="nt">-f1</span><span class="si">)</span>
+readarray <span class="nt">-t</span> files <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$results</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>With the list of files that can be modified we will now apply the SED Script file to each of them.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>file <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">files</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+   </span><span class="nb">sed</span> <span class="nt">--in-place</span><span class="o">=</span>.bku <span class="nt">--file</span><span class="o">=</span><span class="s2">"</span><span class="nv">$SED_SCRIPT</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span>
+
+   <span class="c"># Check if the file was actually modified by sed</span>
+   <span class="k">if</span> <span class="o">!</span> cmp <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">.bak"</span><span class="p">;</span> <span class="k">then</span>
+      <span class="c"># State which file was modified by sed</span>
+      <span class="nb">echo</span> <span class="s2">"Modified </span><span class="nv">$file</span><span class="s2">"</span>
+   <span class="k">fi</span>
+
+   <span class="c"># Remove the backup copies</span>
+   <span class="nb">rm</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">.bak"</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>And that is it. I put both search.sh and replace.sh in a git pre-commit hook. These files only need to be changed when there is a new type of folder or file type to ignore when replacing private and redacted information.</p>
+
+<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/replace.sh">Github Replace.sh</a></p>
+
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction-replace%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Data+Redaction+-+Replace%20http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction-replace%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction-replace%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=Data+Redaction+-+Replace&url=http%3A%2F%2Flocalhost%3A4000%2Fdata-redaction-replace%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/json-schema/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> JSON Schema
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/data-redaction-search/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Data Redaction - Search
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

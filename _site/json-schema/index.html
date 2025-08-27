@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>JSON Schema | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="JSON Schema" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="JSON Standards" />
+<meta property="og:description" content="JSON Standards" />
+<link rel="canonical" href="http://localhost:4000/json-schema/" />
+<meta property="og:url" content="http://localhost:4000/json-schema/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-21T15:01:25-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="JSON Schema" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-21T15:01:25-04:00","datePublished":"2021-10-21T15:01:25-04:00","description":"JSON Standards","headline":"JSON Schema","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/json-schema/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/json-schema/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  json-schema">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">JSON Schema
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">2 min read</span>
+
+    <time class="page-date dt-published" datetime="2021-10-21T15:01:25-04:00"><a class="u-url" href="">October 21, 2021</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <h2 id="json-standards">JSON Standards</h2>
+
+<p>Most people are not aware that there are standards for JSON – or lots of other things in the software development 
+world. Let’s have a look; if you are a learner this will push you forward…</p>
+
+<p>JSON stands for "<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation", a simple data interchange format. There are lots of these data interchange formats but JSON is great for web development due to its strong ties to Javascript and, of course, Java.</p>
+
+<h2 id="json-structure">JSON Structure</h2>
+
+<p>JSON supports the following data structures but they all have different interpretations in various programming
+languages:</p>
+<ul>
+  <li>
+    <p>object:</p>
+
+    <blockquote>
+      <p>{ ‘key1’: ‘value1’, ‘key2’: ‘value2’ }</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>array:</p>
+
+    <blockquote>
+      <p>[ ‘first’, ‘second’, ‘third’ ]</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>number:</p>
+
+    <blockquote>
+      <p>42</p>
+    </blockquote>
+
+    <blockquote>
+      <p>3.1415926</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>string:</p>
+
+    <blockquote>
+      <p>‘This is a string’</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>boolean:</p>
+
+    <blockquote>
+      <p>true</p>
+    </blockquote>
+
+    <blockquote>
+      <p>false</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>null:</p>
+
+    <blockquote>
+      <p>null</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>What some people might expect with JSON:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">name'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">John</span><span class="nv"> </span><span class="s">Doe'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">birthday'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">February</span><span class="nv"> </span><span class="s">22,</span><span class="nv"> </span><span class="s">1978'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">address'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Richmond,</span><span class="nv"> </span><span class="s">Virginia,</span><span class="nv"> </span><span class="s">United</span><span class="nv"> </span><span class="s">States'</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>What JSON should look like:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">first_name'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">John'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">last_name'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Doe'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">birthday'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1978-02-22'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">address'</span><span class="pi">:</span> <span class="pi">{</span>
+    <span class="s1">'</span><span class="s">home'</span><span class="pi">:</span> <span class="nv">true</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">street_address'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2020</span><span class="nv"> </span><span class="s">Richmond</span><span class="nv"> </span><span class="s">Blvd.'</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">city'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Richmond'</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">state'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Virginia'</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">country'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">United</span><span class="nv"> </span><span class="s">States'</span>
+  <span class="pi">}</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>One of the JSON sample representations is better than the other. The first is quick and dirty while the second has a thought out structure. A schema makes the second one even better and easier to interpret when one could need to support multiple consumers or using various programming languages.</p>
+
+<p>This is an example of the JSON Schema for the second JSON sample. Note how it is still JSON also:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">$id'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">https://yoursite.com/person.schema.json'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">$schema'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">https://json-schema.org/draft/2020-12/schema'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">title'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Person'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">object'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">properties'</span><span class="pi">:</span> <span class="pi">{</span>
+    <span class="s1">'</span><span class="s">first_name'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">last_name'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">birthday'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">format'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">date'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">address'</span><span class="pi">:</span> <span class="pi">{</span>
+      <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">object'</span><span class="pi">,</span>
+      <span class="s1">'</span><span class="s">properties'</span><span class="pi">:</span> <span class="pi">{</span>
+        <span class="s1">'</span><span class="s">home'</span><span class="pi">:</span> <span class="pi">{</span><span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">boolean'</span> <span class="pi">}</span>
+        <span class="s1">'</span><span class="s">street_address'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+        <span class="s1">'</span><span class="s">city'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+        <span class="s1">'</span><span class="s">state'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+        <span class="s1">'</span><span class="s">country'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span> <span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">}</span>
+      <span class="pi">}</span>
+    <span class="pi">}</span>
+  <span class="pi">}</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<h2 id="declaring-a-json-schema">Declaring a JSON Schema</h2>
+
+<p>A schema needs to be shared. It is a way of saying "This is what we expect from our clients and what we will
+deliver." Doesn’t this make life simpler rather than guessing around until something works?</p>
+
+<p>Is this something new? Nope, even XML had schema. Do you remember XSL? There was a reason for that. Every
+programming language out there has a "schema" as well.</p>
+
+<p>In the above example JSON schema one should have noticed the "type" keyword. A JSON property can often be misinterpreted. "Is it a number? A string? An object? What do I provide?", would be some common questions.</p>
+
+<p>In the schema, "type" specifies the JSON type that is accepted. Sometimes a producer / consumer can handle multiple types but we need to be specific.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">number'</span> <span class="pi">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Accepts number only.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">number</span><span class="pi">,</span> <span class="nv">string</span><span class="pi">]</span> <span class="pi">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Accepts number or string.</p>
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">integer'</span> <span class="pi">}</span>
+</code></pre></div>  </div>
+  <p>Accepts integer number only.</p>
+</blockquote>
+
+<p>Additional attributes can accompany a "type". For example, one could add ‘description’, ‘minimum’, ‘maximum’, ‘minLength’, ‘maxLength’, ‘pattern’, ‘format’ and more properties. Just stick to the standards one makes.</p>
+
+<p>The JSON schema also includes annotations like ‘$schema’ <strong>(points to the type of schema being used)</strong>, ‘title’,
+‘description’, ‘default’, ‘examples’, ‘$comment’, ‘enum’, ‘const’, ‘required’ and many more.</p>
+
+<h2 id="non-json-data">Non-JSON Data</h2>
+<p>To include non-JSON data one can also make use of the schema to clarify what is being passed around by using 
+annotations like ‘contentMediaType’ and ‘contentEncoding’.</p>
+
+<p>As an example, the proposed schema:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">object'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">properties'</span><span class="pi">:</span> <span class="pi">{</span>
+    <span class="s1">'</span><span class="s">contentEncoding'</span><span class="pi">:</span>  <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">contentMediaType'</span><span class="pi">:</span>  <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">data'</span><span class="pi">:</span>  <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">}</span>
+  <span class="pi">}</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>The sample data:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">contentEncoding'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">base64'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">contentMediaType'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">image/png'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">data'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">iVBORw0KGgoAAAANSUhEUgAAABgAAAA...'</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+<p>For more details: <a href="https://json-schema.org">https://json-schema.org</a></p>
+
+<p>Specification: <a href="https://json-schema.org/specification.html">https://json-schema.org/specification.html</a></p>
+
+<p>If you need help making a JSON schema: <a href="https://jsonschema.net/">https://jsonschema.net/</a></p>
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fjson-schema%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=JSON+Schema%20http%3A%2F%2Flocalhost%3A4000%2Fjson-schema%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjson-schema%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=JSON+Schema&url=http%3A%2F%2Flocalhost%3A4000%2Fjson-schema%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/solid/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> SOLID
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/data-redaction-replace/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Data Redaction - Replace
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

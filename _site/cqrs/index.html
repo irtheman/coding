@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>CQRS | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="CQRS" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="CQRS is a Command, Query, Responsibility and Segregation design pattern." />
+<meta property="og:description" content="CQRS is a Command, Query, Responsibility and Segregation design pattern." />
+<link rel="canonical" href="http://localhost:4000/cqrs/" />
+<meta property="og:url" content="http://localhost:4000/cqrs/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-06T16:27:25-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="CQRS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-10-06T16:27:25-04:00","datePublished":"2020-10-06T16:27:25-04:00","description":"CQRS is a Command, Query, Responsibility and Segregation design pattern.","headline":"CQRS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cqrs/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/cqrs/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  cqrs">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">CQRS
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">3 min read</span>
+
+    <time class="page-date dt-published" datetime="2020-10-06T16:27:25-04:00"><a class="u-url" href="">October 6, 2020</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <p>CQRS is a Command, Query, Responsibility and Segregation design pattern.</p>
+
+<p>CQRS (Command Query Responsibility Segregation) is a powerful architectural pattern that seems to cause quite a lot of confusion; it breaks from the norms most developers cling to by segregating the read and write operations with interfaces (check out <a href="https://blog.matthewhanna.net/solid">SOLID</a> to see how this improves performance, connections, and maintenance). With the popularity of micro-services and the event-based programming model, it is important to know what CQRS is. This is a potentially good option for working with large complicated databases.</p>
+
+<p>First, let’s make sure we are in agreement on what CRUD (Create, Read, Update and Delete), the old CQRS competitor, is. When one thinks about this, CRUD is what most basic software systems rely on. A developer has some records, they may want to read some records, update the records, create a new record or delete some records. If one wants to build a system, a reasonable starting point would be using the same model for retrieving object as well as updating objects. As an example, assume you want to write a “Video Store Application”. You may have a <em>VideoInventoryService</em> that lets you do things such as add new videos to the inventory, mark some of the videos as loaned out, check if there is a specific video, etc. That would be a very simple CRUD system.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Letter</th>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">Command</td>
+      <td style="text-align: left">A Command is a method that performs an action. These would be like the Create, Update and Delete parts of a CRUD system.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Q</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">A Query is a method that returns Data to the caller without modifying the records stored. This is the Read part of a CRUD system.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">R</td>
+      <td style="text-align: left">Responsibility</td>
+      <td style="text-align: left">The Responsibility part here is about providing a responsibility for the Command part and and another responsibility for the Query part of the CQRS system.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">S</td>
+      <td style="text-align: left">Segregation</td>
+      <td style="text-align: left">Segregation is the explicit separation of those Command and Query responsibilities improving performance and maintenance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In CQRS the goal is to segregate the responsibilities for executing commands and queries. This simply means that in a CQRS system, there would be no place for <em>VideoInventoryService</em> that is responsible for both queries and commands. You could have <em>VideoInventoryReadService</em>, <em>VideoLendingReadService</em> and maybe more. These services are broken down into separate responsibilities without concern for the other services. They will even run simultaneously meaning the micro-services don’t have to wait for a write or a read to finish. That is the job of the appropriate micro-service to finish it’s task while allowing others to continue.</p>
+
+<p>From a desktop development world, or maybe even the monolithic services view, this does not sound like the most practical thing. And in some cases it may not be practical. How complex is your data source? Will breaking it down make development and maintenance easier?</p>
+
+<p>Another aspect to keep in mind is that if the developers are employing an actual domain driven development practice then the CQRS system is made even more simple by only being concerned with it’s own specific domain. The purposes of the data driven micro-services become more simplified and the micro-services themselves no 
+longer have to be concerned about details outside of their domain. Also, another nice thing about CQRS is there is no requirement for Event Sourcing. Commands are in effect streams of events that are persisted in the command part of the CQRS system. Queries only see and interpret these events once the data source is updated; no early peeks or corrupted data. In an event-driver distributed system like that seen in services or desktop applications there must be constant messages being passed around to keep changes orchestrated. Using the same domain 
+model, or not separating these responsibilities, would be a mistake.</p>
+
+<p>Finally, in summary, for most non-trivial systems it is not necessary to implement CQRS. In micro-services, the CRUD system is fine when the system’s purpose is very focused on a common task like instant messaging, creating a meme repository or maybe having a driving app. Adding complexity like a myriad of unrelated tasks, a complex multi-purpose database, or other trivial complications makes CRUD more difficult. The added complexity may end up detrimental to the system design. Plan carefully and be ready for the future.</p>
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcqrs%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=CQRS%20http%3A%2F%2Flocalhost%3A4000%2Fcqrs%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcqrs%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=CQRS&url=http%3A%2F%2Flocalhost%3A4000%2Fcqrs%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/redis-cache/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> Redis Cache
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/solid/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        SOLID
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>
