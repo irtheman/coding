@@ -1,73 +1,1126 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-07-27T11:31:48-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Software Design Blog</title><subtitle>Matthew Hanna's software design blog.</subtitle><entry><title type="html">Integrating HTML5 Canvas In Jekyll</title><link href="http://localhost:4000/integrating_canvas/" rel="alternate" type="text/html" title="Integrating HTML5 Canvas In Jekyll" /><published>2020-05-17T19:30:25-04:00</published><updated>2020-05-17T19:30:25-04:00</updated><id>http://localhost:4000/integrating_canvas</id><content type="html" xml:base="http://localhost:4000/integrating_canvas/">&lt;p&gt;I was just wondering about integrating the HTML5 canvas into my Software Design blog like 
-I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-08-26T20:43:14-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Software Design Blog</title><subtitle>Matthew Hanna&apos;s software design blog.</subtitle><entry><title type="html">Data Redaction</title><link href="http://localhost:4000/data-redaction/" rel="alternate" type="text/html" title="Data Redaction" /><published>2025-08-26T15:03:25-04:00</published><updated>2025-08-26T15:03:25-04:00</updated><id>http://localhost:4000/data-redaction</id><content type="html" xml:base="http://localhost:4000/data-redaction/"><![CDATA[<p>Using data redaction on all my repositories.</p>
 
-&lt;canvas id=&quot;canvas&quot; width=&quot;400&quot; height=&quot;400&quot; style=&quot;background-color:#555&quot;&gt;
-Your browser does not support the HTML5 canvas tag.&lt;/canvas&gt;
+<h1 id="data-redaction">Data Redaction</h1>
 
-&lt;p&gt;I saw this clock as a demo a long time ago and I was happily able to reproduce it.
-&lt;script&gt;clock();&lt;/script&gt;&lt;/p&gt;</content><author><name></name></author><category term="javascript" /><category term="html" /><summary type="html">I was just wondering about integrating the HTML5 canvas into my Software Design blog like I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.</summary></entry><entry><title type="html">Integrating JavaScript In Jekyll</title><link href="http://localhost:4000/integrating_javascript/" rel="alternate" type="text/html" title="Integrating JavaScript In Jekyll" /><published>2020-05-10T19:24:25-04:00</published><updated>2020-05-10T19:24:25-04:00</updated><id>http://localhost:4000/integrating_javascript</id><content type="html" xml:base="http://localhost:4000/integrating_javascript/">&lt;p&gt;I was wondering about integrating JavaScript into my Software Design blog and Markdown 
+<p>The term for removing private information from code is data redaction. This technique involves masking or obscuring sensitive data within a document or dataset to protect personally identifiable information (PII) and other confidential data. Additionally, the process of hiding or removing sensitive information from documents is referred to as document redaction.</p>
+
+<h3 id="some-traditional-methods">Some Traditional Methods</h3>
+<p>Let’s say we have a docker compose for a complex set of services or maybe a python program for running an AI model. We want to share the code but, we don’t want to share our local information like the internal servers being used, their ports, the website domains, user names, passwords, contact information, or more.</p>
+
+<p>I won’t bother explaining docker compose yaml files and their .env and secret files but they are the  best solutions. For docker compose one would use the .env and secret files that are then placed in the .gitignore file so they don’t get deployed. The .env, though in the .gitignore file, can be replaced with an uploadable example like ‘example.env’ so the one using the code can see what they need to provide. The same applies for the secret files, the secret file can have an uploadable replacement like ‘example.db_root_password.txt’. Documentation is very important.</p>
+
+<p>For an application, like for python, one might use environment variables and document what they should look like so the one using the code can know what they need to complete. A simple script to launch the python application can include those environment variables like this but excluding the launching script using .gitignore…</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># File: launch.sh</span>
+
+<span class="nv">GPU_BASE_URL</span><span class="o">=</span>”MyPc1.local”
+<span class="nv">GPU_BASE_PORT</span><span class="o">=</span>”5005”
+
+python ./my-ai-script.py
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># File: .gitignore</span>
+.env
+secrets/
+launch.sh
+</code></pre></div></div>
+
+<h3 id="my-custom-cover-all-redaction-method">My Custom Cover-All Redaction Method</h3>
+<p>I personally have been using a custom bash script that just goes through every folder and file in the repository replacing anything private with something else. The whole redaction process can be undone using the same script. All the private information is kept in a ‘private-information.txt’ file that is never in any repository. This way all the private information is in one place and before any commit, using a git pre-commit hook, everything gets redacted.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># File: .git/hooks/pre-commit</span>
+
+<span class="nv">count</span><span class="o">=</span><span class="si">$(</span>/scripts/search.sh | <span class="nb">wc</span> <span class="nt">-l</span><span class="si">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$count</span><span class="s2">"</span> <span class="nt">-gt</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  /scripts/replace.sh ../../
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>The information used by search.sh and replace.sh is in the ‘private-information.txt’ file. All search and replace goes in the order of the longer string to be replaced down to the smaller string to be replaced so the longer one gets matched first.</p>
+
+<p>One will notice that I am using an equal sign as a separator in this example. If one wants to use this script, just use a character not likely to be redacted like a whitespace or control character i.e. \r, \n, \v, etc</p>
+
+<p><a name="private-information"></a>
+Here is an example of what the private-information.txt file would look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>amigo.lan=MyPc1.local
+hermano.lan=MyPc2.local
+omigo=MyPc1
+hermano=MyPc2
+MySecretPassword1=&lt;password&gt;
+MySecretPassword2=&lt;Password&gt;
+MySecretPassword3=&lt;Pwd&gt;
+MyUserName=&lt;login&gt;
+me@mywebsite.net=user@domain.tld
+contact@mywebsite.net=name@domain.tld
+support@mywebsite.net=id@domain.tld
+blog.mywebsite.net=sub.domain.tld
+photos.mywebsite.net=immich.domain.tld
+nc.mywebsite.net=nextcloud.domain.tld
+mywebsite.net=domain.tld
+</code></pre></div></div>
+
+<p>Pretty simple, right? The whole point is to always cover anything that needs to be redacted with the ability to undo the redaction when needed. Let’s say one has all their repositories in one ‘repos’ folder. Every repository can then be kept redacted by running this script at any time.</p>
+
+<p>What are these search and replace scripts I’m talking about? See ya in the next post!</p>
+
+<p>Post: <a href="https://blog.matthewhanna.net/data-redaction-search">Search For Redacted Data</a></p>]]></content><author><name></name></author><category term="bash" /><summary type="html"><![CDATA[Using data redaction on all my repositories.]]></summary></entry><entry><title type="html">Data Redaction - Search</title><link href="http://localhost:4000/data-redaction-search/" rel="alternate" type="text/html" title="Data Redaction - Search" /><published>2025-08-26T15:02:25-04:00</published><updated>2025-08-26T15:02:25-04:00</updated><id>http://localhost:4000/data-redaction-search</id><content type="html" xml:base="http://localhost:4000/data-redaction-search/"><![CDATA[<p>Searching for private and redacted information in my repositories.</p>
+
+<h1 id="data-redaction-search-script">Data Redaction Search Script</h1>
+
+<p>One of the things I like to do when it comes to data redaction for my repositories is to check for any private information. I have this bash script called ‘search.sh’ that will search the whole folder for any private information. The script can do the opposite as well, searching for redacted information.</p>
+
+<p>Please take a look at <a href="https://blog.matthewhanna.net/data-redaction#private-information">Data Redaction</a> for the ‘private-information.txt’ that will be used here.</p>
+
+<p><strong>Sample run of search.sh</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Bad run...</span>
+/scripts/search.sh
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usage: /scripts/search.sh [option] &lt;directory&gt;
+Options:
+  -s | --swap          Search for redacted
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Search for private information</span>
+/scripts/search.sh ./
+
+<span class="c"># Search for redacted information</span>
+/scripts/search.sh <span class="nt">-s</span> ./
+</code></pre></div></div>
+
+<p>For this script, since my repositories are always the same layout I define some bash variables that are easy to update. Please excuse the bad naming; they’ve been there for years.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># SECRETS is the file containing patterns to search for</span>
+<span class="nv">SECRETS</span><span class="o">=</span><span class="s2">"/private-information.txt"</span>
+<span class="c"># EXD is a comma-separated list of directories to exclude</span>
+<span class="nv">EXD</span><span class="o">=</span><span class="s2">"--exclude-dir={venv,.git,.vscode}"</span>
+<span class="c"># EXEXT is a comma-separated list of file extensions to exclude</span>
+<span class="nv">EXEXT</span><span class="o">=</span><span class="s2">"--exclude=*.{svg,webp,png,jpg,pdf,docx,gz,zip,tar}"</span>
+<span class="c"># TEMPFILE is where to store the altered private information</span>
+<span class="nv">TEMPFILE</span><span class="o">=</span><span class="s2">"/tmpfs/temp-patterns.txt"</span>
+</code></pre></div></div>
+
+<p>Next, the script loads all the lines for the ‘private-information.txt’ file and puts them in the TEMPFILE location.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Read in all the private information and put it all in the lines array</span>
+<span class="nb">mapfile</span> <span class="nt">-t</span> lines &lt; <span class="nv">$SECRETS</span>
+
+<span class="c"># For each line in the lines array we are going to create the actual</span>
+<span class="c"># file that will be used for searching later.</span>
+<span class="k">for </span>line <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">lines</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do</span>
+  <span class="c"># In the example 'private-information.txt' each private and redacted</span>
+  <span class="c"># are separated by an equal sign</span>
+  <span class="nv">IFS</span><span class="o">=</span><span class="s1">'='</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> array <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span>
+
+  <span class="c"># Swap decides if we will use redacted or private</span>
+  <span class="k">if</span> <span class="nv">$swap</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[1]</span><span class="k">}</span><span class="s2">"</span>
+  <span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[0]</span><span class="k">}</span><span class="s2">"</span>
+  <span class="k">fi
+done</span> <span class="o">&gt;</span> <span class="nv">$TEMPFILE</span>
+<span class="nv">SECRETS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TEMPFILE</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>Now, we just run the grep command and see what is in there…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># There were problems with string interpolation so the script uses eval on a string</span>
+<span class="c"># $folder is the script parameter for the folder to search</span>
+<span class="nb">command</span><span class="o">=</span><span class="s2">"grep </span><span class="nv">$EXD</span><span class="s2"> </span><span class="nv">$EXEXT</span><span class="s2"> -RiIFn -f </span><span class="nv">$SECRETS</span><span class="s2"> </span><span class="nv">$folder</span><span class="s2">"</span>
+<span class="nb">eval</span> <span class="nv">$command</span>
+</code></pre></div></div>
+
+<p>The end result of running this script is either nothing or the file name, line number, and the text that matches the private or redacted information being searched for. As for replacing private with redacted; see ya in the next post!</p>
+
+<p>Post: <a href="https://blog.matthewhanna.net/data-redaction-replace">Replacing Redacted Data</a></p>
+
+<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/search.sh">Github Search.sh</a></p>]]></content><author><name></name></author><category term="bash" /><summary type="html"><![CDATA[Searching for private and redacted information in my repositories.]]></summary></entry><entry><title type="html">Data Redaction - Replace</title><link href="http://localhost:4000/data-redaction-replace/" rel="alternate" type="text/html" title="Data Redaction - Replace" /><published>2025-08-26T15:01:25-04:00</published><updated>2025-08-26T15:01:25-04:00</updated><id>http://localhost:4000/data-redaction-replace</id><content type="html" xml:base="http://localhost:4000/data-redaction-replace/"><![CDATA[<p>Replacing private or redacted information in my repositories.</p>
+
+<h1 id="data-redaction-replace-script">Data Redaction Replace Script</h1>
+
+<p>It’s time to take a look at the script that will replace the private information with the redacted information. The same script can undo that switch of information making it very convenient when storing code on a remote repository without making it private. This bash script is called ‘replace.sh’ and it will search the whole folder for any private information replacing it with the redacted version.</p>
+
+<p>Please take a look at <a href="https://blog.matthewhanna.net/data-redaction#private-information">Data Redaction</a> for the ‘private-information.txt’ that will be used here.</p>
+
+<p><strong>Sample run of search.sh</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Bad run...</span>
+/scripts/replace.sh
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usage: /scripts/replace.sh [option] &lt;directory&gt;
+Options:
+  -s | --swap          Replace redacted with private
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Replace for private information with a redacted version</span>
+/scripts/replace.sh ./
+
+<span class="c"># Replace the redacted version with original private information</span>
+/scripts/replace.sh <span class="nt">-s</span> ./
+</code></pre></div></div>
+
+<p>For this script, I’m adding a bash variable while the others are just like in search.sh. They are easy to update this way. Again, please excuse the bad naming; they’ve been there for years.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># SECRETS is the file containing patterns to search for</span>
+<span class="nv">SECRETS</span><span class="o">=</span><span class="s2">"/private-information.txt"</span>
+<span class="c"># EXD is a comma-separated list of directories to exclude</span>
+<span class="nv">EXD</span><span class="o">=</span><span class="s2">"--exclude-dir={venv,.git,.vscode}"</span>
+<span class="c"># EXEXT is a comma-separated list of file extensions to exclude</span>
+<span class="nv">EXEXT</span><span class="o">=</span><span class="s2">"--exclude=*.{svg,webp,png,jpg,pdf,docx,gz,zip,tar}"</span>
+<span class="c"># SED_SCRIPT is the temporary sed script file</span>
+<span class="nv">SED_SCRIPT</span><span class="o">=</span><span class="s2">"/tmpfs/script.sed"</span>
+</code></pre></div></div>
+
+<p>This script uses the find command so we need to add the parameters to exclude the chosen directories and file extensions. I think it makes things easier to store the directories and file extensions to exclude in variables and then just generate what is needed for the find command.</p>
+
+<p>This find command will be used like this…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find ./folder <span class="nt">-type</span> f <span class="se">\(</span> <span class="o">!</span> <span class="nt">-iname</span> <span class="s2">".png"</span> <span class="o">!</span> <span class="nt">-iname</span> <span class="s2">".zip"</span> <span class="se">\)</span> <span class="o">!</span> <span class="nt">-path</span> <span class="s2">"./venv"</span> <span class="o">!</span> <span class="nt">-path</span> <span class="s2">"./.git"</span> <span class="nt">-print</span>
+</code></pre></div></div>
+
+<p>To generate the directories to be excluded the following script is used:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the exclude paths</span>
+<span class="nv">path</span><span class="o">=</span><span class="s2">""</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">','</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> fld <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$EXD</span><span class="s2">"</span>
+<span class="k">for </span>d <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">fld</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+  </span><span class="nv">path</span><span class="o">=</span><span class="s2">"</span><span class="nv">$path</span><span class="s2"> ! -path ""./</span><span class="k">${</span><span class="nv">d</span><span class="k">}</span><span class="s2">/*"""</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>To generate the file extensions to be excluded the following script is then used:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the exclude extensions</span>
+<span class="nv">extension</span><span class="o">=</span><span class="s2">"</span><span class="se">\(</span><span class="s2"> "</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">','</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> ext <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$EXEXT</span><span class="s2">"</span>
+<span class="k">for </span>e <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">ext</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+  </span><span class="nv">extension</span><span class="o">=</span><span class="s2">"</span><span class="nv">$extension</span><span class="s2"> ! -iname "".</span><span class="k">${</span><span class="nv">e</span><span class="k">}</span><span class="s2">"""</span>
+<span class="k">done
+</span>extension+<span class="o">=</span><span class="s2">" </span><span class="se">\)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>This script also is going to use the sed command. Using the sed script file is best in this situation but the file has to be generated. The sed command will make changes directly to the target file while making a backup before making that change.</p>
+
+<p>The sed command will be used like this…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># SED script file is, per line, like this...</span>
+<span class="c"># s/SEARCH/REPLACE/g</span>
+
+<span class="nb">sed</span> <span class="nt">--in-place</span><span class="o">=</span>.bak <span class="nt">--file</span><span class="o">=</span>/tmpfs/script.sed this-file.txt
+</code></pre></div></div>
+
+<p>To generate the SED script file we have to read the ‘private-information.txt’ and transform it taking into consideration the swap parameter. SED does not do non-regex substitutions so there will be escaping added for both private and redacted.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the sed script from the secrets file</span>
+<span class="nb">mapfile</span> <span class="nt">-t</span> lines &lt; <span class="nv">$SECRETS</span>
+
+<span class="k">for </span>line <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">lines</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+  </span><span class="nv">IFS</span><span class="o">=</span><span class="s1">'='</span> <span class="nb">read</span> <span class="nt">-r</span> <span class="nt">-a</span> array <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span>
+
+  <span class="c"># Swapped or not all entries must be escaped</span>
+  <span class="k">if</span> <span class="nv">$swap</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">escaped_lhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[1]//[][\\\/.^\</span><span class="nv">$*</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+    <span class="nv">escaped_rhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[0]//[\\\/&amp;</span><span class="s1">$'</span><span class="se">\n</span><span class="s1">'</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+  <span class="k">else
+    </span><span class="nv">escaped_lhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[0]//[][\\\/.^\</span><span class="nv">$*</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+    <span class="nv">escaped_rhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">array</span><span class="p">[1]//[\\\/&amp;</span><span class="s1">$'</span><span class="se">\n</span><span class="s1">'</span><span class="p">]/\\&amp;</span><span class="k">}</span><span class="s2">"</span>
+  <span class="k">fi
+  </span><span class="nv">escaped_rhs</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">escaped_rhs</span><span class="p">%\\</span><span class="s1">$'</span><span class="se">\n</span><span class="s1">'</span><span class="k">}</span><span class="s2">"</span>
+
+  <span class="nb">echo</span> <span class="s2">"s/</span><span class="k">${</span><span class="nv">escaped_lhs</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">escaped_rhs</span><span class="k">}</span><span class="s2">/g"</span>
+<span class="k">done</span> <span class="o">&gt;</span> <span class="nv">$SED_SCRIPT</span>
+</code></pre></div></div>
+
+<p>Next, we just need to get the list of files that can be modified…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Find files, filter for ASCII, and create an array of files</span>
+<span class="nb">command</span><span class="o">=</span><span class="s2">"find </span><span class="nv">$folder</span><span class="s2"> -type f </span><span class="nv">$extension</span><span class="s2"> </span><span class="nv">$path</span><span class="s2"> -print"</span>
+<span class="nv">results</span><span class="o">=</span><span class="si">$(</span><span class="nb">eval</span> <span class="nv">$command</span> | xargs file | <span class="nb">grep </span>ASCII | <span class="nb">cut</span> <span class="nt">-d</span>: <span class="nt">-f1</span><span class="si">)</span>
+readarray <span class="nt">-t</span> files <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$results</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>With the list of files that can be modified we will now apply the SED Script file to each of them.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>file <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">files</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+   </span><span class="nb">sed</span> <span class="nt">--in-place</span><span class="o">=</span>.bku <span class="nt">--file</span><span class="o">=</span><span class="s2">"</span><span class="nv">$SED_SCRIPT</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span>
+
+   <span class="c"># Check if the file was actually modified by sed</span>
+   <span class="k">if</span> <span class="o">!</span> cmp <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">.bak"</span><span class="p">;</span> <span class="k">then</span>
+      <span class="c"># State which file was modified by sed</span>
+      <span class="nb">echo</span> <span class="s2">"Modified </span><span class="nv">$file</span><span class="s2">"</span>
+   <span class="k">fi</span>
+
+   <span class="c"># Remove the backup copies</span>
+   <span class="nb">rm</span> <span class="s2">"</span><span class="nv">$file</span><span class="s2">.bak"</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<p>And that is it. I put both search.sh and replace.sh in a git pre-commit hook. These files only need to be changed when there is a new type of folder or file type to ignore when replacing private and redacted information.</p>
+
+<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/replace.sh">Github Replace.sh</a></p>]]></content><author><name></name></author><category term="bash" /><summary type="html"><![CDATA[Replacing private or redacted information in my repositories.]]></summary></entry><entry><title type="html">JSON Schema</title><link href="http://localhost:4000/json-schema/" rel="alternate" type="text/html" title="JSON Schema" /><published>2021-10-21T15:01:25-04:00</published><updated>2021-10-21T15:01:25-04:00</updated><id>http://localhost:4000/json-schema</id><content type="html" xml:base="http://localhost:4000/json-schema/"><![CDATA[<h2 id="json-standards">JSON Standards</h2>
+
+<p>Most people are not aware that there are standards for JSON – or lots of other things in the software development 
+world. Let’s have a look; if you are a learner this will push you forward…</p>
+
+<p>JSON stands for "<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation", a simple data interchange format. There are lots of these data interchange formats but JSON is great for web development due to its strong ties to Javascript and, of course, Java.</p>
+
+<h2 id="json-structure">JSON Structure</h2>
+
+<p>JSON supports the following data structures but they all have different interpretations in various programming
+languages:</p>
+<ul>
+  <li>
+    <p>object:</p>
+
+    <blockquote>
+      <p>{ ‘key1’: ‘value1’, ‘key2’: ‘value2’ }</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>array:</p>
+
+    <blockquote>
+      <p>[ ‘first’, ‘second’, ‘third’ ]</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>number:</p>
+
+    <blockquote>
+      <p>42</p>
+    </blockquote>
+
+    <blockquote>
+      <p>3.1415926</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>string:</p>
+
+    <blockquote>
+      <p>‘This is a string’</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>boolean:</p>
+
+    <blockquote>
+      <p>true</p>
+    </blockquote>
+
+    <blockquote>
+      <p>false</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>null:</p>
+
+    <blockquote>
+      <p>null</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>What some people might expect with JSON:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">name'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">John</span><span class="nv"> </span><span class="s">Doe'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">birthday'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">February</span><span class="nv"> </span><span class="s">22,</span><span class="nv"> </span><span class="s">1978'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">address'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Richmond,</span><span class="nv"> </span><span class="s">Virginia,</span><span class="nv"> </span><span class="s">United</span><span class="nv"> </span><span class="s">States'</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>What JSON should look like:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">first_name'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">John'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">last_name'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Doe'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">birthday'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1978-02-22'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">address'</span><span class="pi">:</span> <span class="pi">{</span>
+    <span class="s1">'</span><span class="s">home'</span><span class="pi">:</span> <span class="nv">true</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">street_address'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2020</span><span class="nv"> </span><span class="s">Richmond</span><span class="nv"> </span><span class="s">Blvd.'</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">city'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Richmond'</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">state'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Virginia'</span><span class="pi">,</span>
+    <span class="s1">'</span><span class="s">country'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">United</span><span class="nv"> </span><span class="s">States'</span>
+  <span class="pi">}</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>One of the JSON sample representations is better than the other. The first is quick and dirty while the second has a thought out structure. A schema makes the second one even better and easier to interpret when one could need to support multiple consumers or using various programming languages.</p>
+
+<p>This is an example of the JSON Schema for the second JSON sample. Note how it is still JSON also:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">$id'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">https://yoursite.com/person.schema.json'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">$schema'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">https://json-schema.org/draft/2020-12/schema'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">title'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Person'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">object'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">properties'</span><span class="pi">:</span> <span class="pi">{</span>
+    <span class="s1">'</span><span class="s">first_name'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">last_name'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">birthday'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">format'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">date'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">address'</span><span class="pi">:</span> <span class="pi">{</span>
+      <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">object'</span><span class="pi">,</span>
+      <span class="s1">'</span><span class="s">properties'</span><span class="pi">:</span> <span class="pi">{</span>
+        <span class="s1">'</span><span class="s">home'</span><span class="pi">:</span> <span class="pi">{</span><span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">boolean'</span> <span class="pi">}</span>
+        <span class="s1">'</span><span class="s">street_address'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+        <span class="s1">'</span><span class="s">city'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+        <span class="s1">'</span><span class="s">state'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+        <span class="s1">'</span><span class="s">country'</span><span class="pi">:</span> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span> <span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">}</span>
+      <span class="pi">}</span>
+    <span class="pi">}</span>
+  <span class="pi">}</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<h2 id="declaring-a-json-schema">Declaring a JSON Schema</h2>
+
+<p>A schema needs to be shared. It is a way of saying "This is what we expect from our clients and what we will
+deliver." Doesn’t this make life simpler rather than guessing around until something works?</p>
+
+<p>Is this something new? Nope, even XML had schema. Do you remember XSL? There was a reason for that. Every
+programming language out there has a "schema" as well.</p>
+
+<p>In the above example JSON schema one should have noticed the "type" keyword. A JSON property can often be misinterpreted. "Is it a number? A string? An object? What do I provide?", would be some common questions.</p>
+
+<p>In the schema, "type" specifies the JSON type that is accepted. Sometimes a producer / consumer can handle multiple types but we need to be specific.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">number'</span> <span class="pi">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Accepts number only.</p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">number</span><span class="pi">,</span> <span class="nv">string</span><span class="pi">]</span> <span class="pi">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Accepts number or string.</p>
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">integer'</span> <span class="pi">}</span>
+</code></pre></div>  </div>
+  <p>Accepts integer number only.</p>
+</blockquote>
+
+<p>Additional attributes can accompany a "type". For example, one could add ‘description’, ‘minimum’, ‘maximum’, ‘minLength’, ‘maxLength’, ‘pattern’, ‘format’ and more properties. Just stick to the standards one makes.</p>
+
+<p>The JSON schema also includes annotations like ‘$schema’ <strong>(points to the type of schema being used)</strong>, ‘title’,
+‘description’, ‘default’, ‘examples’, ‘$comment’, ‘enum’, ‘const’, ‘required’ and many more.</p>
+
+<h2 id="non-json-data">Non-JSON Data</h2>
+<p>To include non-JSON data one can also make use of the schema to clarify what is being passed around by using 
+annotations like ‘contentMediaType’ and ‘contentEncoding’.</p>
+
+<p>As an example, the proposed schema:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">object'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">properties'</span><span class="pi">:</span> <span class="pi">{</span>
+    <span class="s1">'</span><span class="s">contentEncoding'</span><span class="pi">:</span>  <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">contentMediaType'</span><span class="pi">:</span>  <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">},</span>
+    <span class="s1">'</span><span class="s">data'</span><span class="pi">:</span>  <span class="pi">{</span> <span class="s1">'</span><span class="s">type'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">string'</span> <span class="pi">}</span>
+  <span class="pi">}</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>The sample data:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+  <span class="s1">'</span><span class="s">contentEncoding'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">base64'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">contentMediaType'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">image/png'</span><span class="pi">,</span>
+  <span class="s1">'</span><span class="s">data'</span><span class="pi">:</span> <span class="s1">'</span><span class="s">iVBORw0KGgoAAAANSUhEUgAAABgAAAA...'</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+<p>For more details: <a href="https://json-schema.org">https://json-schema.org</a></p>
+
+<p>Specification: <a href="https://json-schema.org/specification.html">https://json-schema.org/specification.html</a></p>
+
+<p>If you need help making a JSON schema: <a href="https://jsonschema.net/">https://jsonschema.net/</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[JSON Standards]]></summary></entry><entry><title type="html">SOLID</title><link href="http://localhost:4000/solid/" rel="alternate" type="text/html" title="SOLID" /><published>2020-10-07T16:28:25-04:00</published><updated>2020-10-07T16:28:25-04:00</updated><id>http://localhost:4000/solid</id><content type="html" xml:base="http://localhost:4000/solid/"><![CDATA[<p>SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin</p>
+
+<ul id="markdown-toc">
+  <li><a href="#what-is-solid" id="markdown-toc-what-is-solid">What is SOLID?</a></li>
+  <li><a href="#single-responsibility-principle" id="markdown-toc-single-responsibility-principle">Single Responsibility Principle</a></li>
+  <li><a href="#open--closed-principle" id="markdown-toc-open--closed-principle">Open / Closed Principle</a></li>
+  <li><a href="#liskov-substitution-principle" id="markdown-toc-liskov-substitution-principle">Liskov Substitution Principle</a></li>
+  <li><a href="#interface-segregation-principle" id="markdown-toc-interface-segregation-principle">Interface Segregation Principle</a></li>
+  <li><a href="#dependency-inversion-principle" id="markdown-toc-dependency-inversion-principle">Dependency Inversion Principle</a></li>
+</ul>
+
+<h2 id="what-is-solid">What is SOLID?</h2>
+<p>SOLID is an acronym for the 5 basic principles of good software architecture:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Letter</th>
+      <th style="text-align: left">Abbr</th>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Basic Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">S</td>
+      <td style="text-align: left">SRP</td>
+      <td style="text-align: left">Single Responsibility Principle</td>
+      <td style="text-align: left">A class should have only a single responsibility, that is, it only has 1 specific task to fulfill.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">O</td>
+      <td style="text-align: left">OCP</td>
+      <td style="text-align: left">Open / Closed Principle</td>
+      <td style="text-align: left">A class that needs a new behavior should be extended and not modified.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">L</td>
+      <td style="text-align: left">LSP</td>
+      <td style="text-align: left">Liskov Substitution Principle</td>
+      <td style="text-align: left">A class should be replaceable by a subclass that can change how a task is completed but it doesn’t damage the operation of the dependent classes. In other words, a parent class should be able to refer to child objects seamlessly during runtime via polymorphism.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">I</td>
+      <td style="text-align: left">ISP</td>
+      <td style="text-align: left">Interface Segregation Principle</td>
+      <td style="text-align: left">Instead of one huge multi-purpose interface one should have multiple specific interfaces. A client should not be forced to code for an interface they do not need.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">D</td>
+      <td style="text-align: left">DIP</td>
+      <td style="text-align: left">Dependency Inversion Principle</td>
+      <td style="text-align: left">Implementation should depend on abstraction rather than some concrete solution. High level objects should not have to depend on low level objects; they only need to know the feature is implemented by something.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><i class="fas fa-info-circle" aria-hidden="true"></i> Polymorphism allows the expression of some sort of contract, with potentially many types implementing that contract (whether through class inheritance or not) in different ways, each according to their own purpose. Code <em>using</em> that contract should not have to care about which implementation is involved, only that the contract will be obeyed.</p>
+</blockquote>
+
+<h2 id="single-responsibility-principle">Single Responsibility Principle</h2>
+<p>SRP keeps classes simple, easy to maintain and minifies the effects of any minor changes. A class should only have one responsibility and not multiple. This can sound confusing at first; someone will likely bring up something like a view model or controller but that, in itself, has a single responsibility to manage other classes that themselves have a very simple single responsibility.</p>
+
+<p><strong>Broken - Writing to logfile is not job of Aggregator class.</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>Fixed</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">Logger</span> <span class="n">log</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Logger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Logger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="open--closed-principle">Open / Closed Principle</h2>
+
+<p>Again, OCP keeps classes simple, easy to maintain and minifies the impacts of changes to the code. OCP means that the class should not be modified (i.e. it is closed) but it can be extended (i.e. it is open). A developer will often say, “Hey, I need to add this new capability to this class for this specific case.” That modification can be reckless. One should keep the original class intact so the code relying on that original class isn’t broken. To add that new functionality the class basically has a new task and thus needs to change; that change should be an extension via inheritance.</p>
+
+<p><strong>Broken</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="kt">int</span> <span class="n">DroneType</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">public</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">DroneType</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">DroneType</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">2.0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">DroneType</span> <span class="p">==</span> <span class="m">2</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">32.0</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Fixed (Polymorphism Inheritance)</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">virtual</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="nf">AddHours</span><span class="p">(</span><span class="n">kilometers</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">SpyDrone</span> <span class="p">:</span> <span class="n">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">override</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="k">base</span><span class="p">.</span><span class="nf">ArrivalTime</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">2.0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">AttackDrone</span> <span class="p">:</span> <span class="n">Drone</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">override</span> <span class="n">DateTime</span> <span class="nf">ArrivalTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">kilometers</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="k">base</span><span class="p">.</span><span class="nf">ArrivalTime</span><span class="p">(</span><span class="n">kilometers</span> <span class="p">/</span> <span class="m">32.0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="liskov-substitution-principle">Liskov Substitution Principle</h2>
+
+<p>LSP keeps the overall program working as it was designed though a backing class might have been swapped out for another implementation. A good example of LSP in use is the Mock object often used in Unit Testing. The LSP object can be based off of interfaces or an abstract class as long as the object instance doesn’t break the calling code.</p>
+
+<p><strong>Example - Substituting a logger class doesn’t break Aggregator</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="c1">// private ILogger log = new FileLogger();</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">ILogger</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">FileLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConsoleLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="interface-segregation-principle">Interface Segregation Principle</h2>
+
+<p>ISP helps protect clients from developers damaging interfaces which are normally “contracts” with other clients. Interfaces used by other clients, including actual people or classes throughout your code repositories, should not change because that change could break the client’s software implementation. There is also the tendency to put too much stuff into an interface which can almost be seen as the same as violating the Single Responsibility Principle though from an interface perspective. Requirements matter and sometimes it is a good idea to break up a proposed interface to provide more flexibility.</p>
+
+<p><strong>Original</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Add entity to database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Broken</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">);</span>
+  <span class="n">Entity</span> <span class="nf">Read</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Broken!</span>
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Add entity to database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Fixed</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">IDatabaseV1</span> <span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="c1">// Has Add Method.</span>
+  <span class="n">Entity</span> <span class="nf">Read</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ClientWithRead</span><span class="p">:</span> <span class="n">IDatabaseV1</span><span class="p">,</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">Client</span> <span class="n">obj</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Client</span><span class="p">();</span>
+    <span class="n">obj</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">public</span> <span class="n">Entity</span> <span class="nf">Read</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="c1">// Read from database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">:</span> <span class="n">IDatabase</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Add entity to database.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Results...</span>
+<span class="n">IDatabase</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Client</span><span class="p">();</span> <span class="c1">// Previous clients happy!</span>
+<span class="n">a</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
+<span class="n">IDatabaseV1</span> <span class="n">b</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ClientWithRead</span><span class="p">();</span> <span class="c1">// New client requirements.</span>
+<span class="n">b</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
+<span class="n">entity</span> <span class="p">=</span> <span class="n">b</span><span class="p">.</span><span class="nf">Read</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="dependency-inversion-principle">Dependency Inversion Principle</h2>
+
+<p>Instead of hard coding a class to determine what component should be used internally flexibility should be built in. With DIP we want to invert, or delegate, the responsibility of that swappable component used internally. As an 
+example, instead of using a bunch of IF statements to choose your logging mechanism (that’s a no), or some flag in your logging class (that’s a no) or just becoming inflexible and not allowing for this kind of change one should use Dependency Inversion.</p>
+
+<p><strong>Broke 1</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">Logger</span> <span class="n">log</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Logger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">logToFile</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">.</span><span class="n">LogToFile</span> <span class="p">=</span> <span class="n">logToFile</span><span class="p">;</span>
+      <span class="n">log</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Logger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="kt">bool</span> <span class="n">LogToFile</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">LogToFile</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Broke 2</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log1</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">FileLogger</span><span class="p">();</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log2</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">();</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">logToFile</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">logToFile</span><span class="p">)</span>
+        <span class="n">log1</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+      <span class="k">else</span>
+        <span class="n">log2</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">ILogger</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">FileLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConsoleLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Fixed</strong>
+___</p>
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Aggregator</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="n">ILogger</span> <span class="n">log</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="n">ILogger</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">log</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">Entity</span> <span class="n">entity</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">logToFile</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">try</span>
+    <span class="p">{</span>
+      <span class="c1">// Add entity to aggregator.</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">log</span><span class="p">?.</span><span class="nf">Error</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">interface</span> <span class="nc">ILogger</span>
+<span class="p">{</span>
+  <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">FileLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="nf">WriteAllText</span><span class="p">(</span><span class="s">@"c:\Error.txt"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ConsoleLogger</span> <span class="p">:</span> <span class="n">ILogger</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="k">void</span> <span class="nf">Error</span><span class="p">(</span><span class="kt">string</span> <span class="n">error</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage:</span>
+<span class="n">Aggregator</span> <span class="n">agg1</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="k">new</span> <span class="nf">FileLogger</span><span class="p">());</span>
+<span class="n">Aggregator</span> <span class="n">agg2</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">());</span>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin]]></summary></entry><entry><title type="html">CQRS</title><link href="http://localhost:4000/cqrs/" rel="alternate" type="text/html" title="CQRS" /><published>2020-10-06T16:27:25-04:00</published><updated>2020-10-06T16:27:25-04:00</updated><id>http://localhost:4000/cqrs</id><content type="html" xml:base="http://localhost:4000/cqrs/"><![CDATA[<p>CQRS is a Command, Query, Responsibility and Segregation design pattern.</p>
+
+<p>CQRS (Command Query Responsibility Segregation) is a powerful architectural pattern that seems to cause quite a lot of confusion; it breaks from the norms most developers cling to by segregating the read and write operations with interfaces (check out <a href="https://blog.matthewhanna.net/solid">SOLID</a> to see how this improves performance, connections, and maintenance). With the popularity of micro-services and the event-based programming model, it is important to know what CQRS is. This is a potentially good option for working with large complicated databases.</p>
+
+<p>First, let’s make sure we are in agreement on what CRUD (Create, Read, Update and Delete), the old CQRS competitor, is. When one thinks about this, CRUD is what most basic software systems rely on. A developer has some records, they may want to read some records, update the records, create a new record or delete some records. If one wants to build a system, a reasonable starting point would be using the same model for retrieving object as well as updating objects. As an example, assume you want to write a “Video Store Application”. You may have a <em>VideoInventoryService</em> that lets you do things such as add new videos to the inventory, mark some of the videos as loaned out, check if there is a specific video, etc. That would be a very simple CRUD system.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Letter</th>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">Command</td>
+      <td style="text-align: left">A Command is a method that performs an action. These would be like the Create, Update and Delete parts of a CRUD system.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Q</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">A Query is a method that returns Data to the caller without modifying the records stored. This is the Read part of a CRUD system.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">R</td>
+      <td style="text-align: left">Responsibility</td>
+      <td style="text-align: left">The Responsibility part here is about providing a responsibility for the Command part and and another responsibility for the Query part of the CQRS system.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">S</td>
+      <td style="text-align: left">Segregation</td>
+      <td style="text-align: left">Segregation is the explicit separation of those Command and Query responsibilities improving performance and maintenance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In CQRS the goal is to segregate the responsibilities for executing commands and queries. This simply means that in a CQRS system, there would be no place for <em>VideoInventoryService</em> that is responsible for both queries and commands. You could have <em>VideoInventoryReadService</em>, <em>VideoLendingReadService</em> and maybe more. These services are broken down into separate responsibilities without concern for the other services. They will even run simultaneously meaning the micro-services don’t have to wait for a write or a read to finish. That is the job of the appropriate micro-service to finish it’s task while allowing others to continue.</p>
+
+<p>From a desktop development world, or maybe even the monolithic services view, this does not sound like the most practical thing. And in some cases it may not be practical. How complex is your data source? Will breaking it down make development and maintenance easier?</p>
+
+<p>Another aspect to keep in mind is that if the developers are employing an actual domain driven development practice then the CQRS system is made even more simple by only being concerned with it’s own specific domain. The purposes of the data driven micro-services become more simplified and the micro-services themselves no 
+longer have to be concerned about details outside of their domain. Also, another nice thing about CQRS is there is no requirement for Event Sourcing. Commands are in effect streams of events that are persisted in the command part of the CQRS system. Queries only see and interpret these events once the data source is updated; no early peeks or corrupted data. In an event-driver distributed system like that seen in services or desktop applications there must be constant messages being passed around to keep changes orchestrated. Using the same domain 
+model, or not separating these responsibilities, would be a mistake.</p>
+
+<p>Finally, in summary, for most non-trivial systems it is not necessary to implement CQRS. In micro-services, the CRUD system is fine when the system’s purpose is very focused on a common task like instant messaging, creating a meme repository or maybe having a driving app. Adding complexity like a myriad of unrelated tasks, a complex multi-purpose database, or other trivial complications makes CRUD more difficult. The added complexity may end up detrimental to the system design. Plan carefully and be ready for the future.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[CQRS is a Command, Query, Responsibility and Segregation design pattern.]]></summary></entry><entry><title type="html">Redis Cache</title><link href="http://localhost:4000/redis-cache/" rel="alternate" type="text/html" title="Redis Cache" /><published>2020-10-05T15:46:25-04:00</published><updated>2020-10-05T15:46:25-04:00</updated><id>http://localhost:4000/redis-cache</id><content type="html" xml:base="http://localhost:4000/redis-cache/"><![CDATA[<p>Redis, which stands for <strong>Re</strong>mote <strong>Di</strong>ctionary <strong>S</strong>erver, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.</p>
+
+<h1 id="what-is-redis-cache">What is Redis Cache?</h1>
+
+<p>Redis is an open-source distributed in-memory data store. We can use it as a distributed no-SQL database, as a distributed in-memory cache, or a pub/sub messaging engine. The most popular use case appears to be using it as a distributed in-memory caching engine. Redis supports a variety of data types including strings, hashes, lists, and ordered / unordered sets. Strings and hashes are the most common means for caching. There is even support for geo-spatial indexes where information can be stored by latitude and longitude. There is also a command line interface called redis-cli.exe with all the Redis features easily accessible to IT / admin. There are also a number of asynchronous versions of almost every method for accessing Redis.</p>
+
+<h1 id="installing-redis-on-windows-10">Installing Redis On Windows 10</h1>
+
+<p>Get the MSI binary from here: <a href="https://github.com/microsoftarchive/redis/releases">https://github.com/microsoftarchive/redis/releases</a></p>
+
+<p>Right now, as of 10/5/2020, we are using Redis-x64-3.0.504.msi. During installation all defaults are fine with one exception: always check "Add the Redis installation folder to the PATH environment variable".</p>
+
+<p><img src="/images/RedisPrompt.png" alt="" /></p>
+
+<p>Once Redis is installed there are some adjustments that may need to be made if the defaults are not sufficient. Specifically, if a password is required, the number of databases must change, a cluster is desired, TLS/SSL is needed or there is a port change then it will be necessary to edit the redis.windows-service.conf file found in the Redis installation folder:</p>
+
+<ul>
+  <li>To change the port simply search for "port" and change the port number. The default is 6379.</li>
+  <li>To change the number of databases search for "databases" and change the count. The default is 16.</li>
+  <li>To change the password search for "requirepass" and remove the comment while setting a proper password. The default is none.</li>
+  <li>To enable cluster search for "cluster-enabled" and start from there. The default is false.</li>
+</ul>
+
+<h1 id="installing-redis-client-in-visual-studio">Installing Redis Client in Visual Studio</h1>
+
+<p>There are various Redis clients available (<a href="https://redis.io/clients#c">https://redis.io/clients#c</a>) but StackExchange.Redis is the C# client recommended by RedisLabs due to its high performance and common usage (<a href="https://docs.redislabs.com/latest/rs/references/client_references/client_csharp/">https://docs.redislabs.com/latest/rs/references/client_references/client_csharp/</a>).</p>
+
+<p>For the project that will be using Redis, right-click and select "Manage Nuget Packages…". Search for and install "StackExchange.Redis". Alternatively, you can also use the Package Manager Console to run "Install-Package StackExchange.Redis".</p>
+
+<p>The documentation for StackExchange.Redis can be found on github: <a href="https://stackexchange.github.io/StackExchange.Redis/">https://stackexchange.github.io/StackExchange.Redis/</a></p>
+
+<h1 id="accessing-redis-using-stackexchangeredis">Accessing Redis Using StackExchange.Redis</h1>
+
+<p>A using statement is required to reference StackExchange.Redis</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Using</span> <span class="n">StackExchange</span><span class="p">.</span><span class="n">Redis</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>To acquire access to the Redis server a ConnectionMultiplexer Connection is required:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ConnectionMultiplexer</span> <span class="n">connect</span> <span class="p">=</span> <span class="n">ConnectionMultiplexer</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="s">"hostname:port,password=password"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The ConnectionMultiplexer should not be created per operation. Create it once and reuse it.</p>
+
+<p>With the connection to Redis one needs access to the Redis database where caching will take place:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">IDatabase</span> <span class="n">conn</span> <span class="p">=</span> <span class="n">muxer</span><span class="p">.</span><span class="nf">GetDatabase</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>The default database is 0. The default provides up to 16. The number can be changed in the config file. One idea might be to use a separate database per Tenant to keep things separated.</p>
+
+<h1 id="configuration-of-stackexchangeredis">Configuration of StackExchange.Redis</h1>
+
+<p>As seen above, the ConnectionMultiplexer can be initialized with a parameter string. The many options can be found in the documentation (<a href="https://stackexchange.github.io/StackExchange.Redis/Configuration">https://stackexchange.github.io/StackExchange.Redis/Configuration</a>). Each option is simply separated by commas like this:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">conn</span> <span class="p">=</span> <span class="n">ConnectionMultiplexer</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="s">"redis0:6380,redis1:6380,allowAdmin=true"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>It starts with the main Redis server, then any cluster servers that the client should know about, and then other options follow. AllowAdmin isn't really recommended though it does expand on what the Redis client can do.</p>
+
+<p>Another configuration option is to convert the parameter string into a ConfigurationOptions object:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ConfigurationOptions</span> <span class="n">options</span> <span class="p">=</span> <span class="n">ConfigurationOptions</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="n">configString</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Or one can simply go straight to using the ConfigurationOptions object directly:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ConfigurationOptions</span> <span class="n">config</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ConfigurationOptions</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">KeepAlive</span> <span class="p">=</span> <span class="m">180</span><span class="p">,</span>
+   <span class="n">Password</span> <span class="p">=</span> <span class="s">"changeme"</span>
+ <span class="p">};</span>
+</code></pre></div></div>
+
+<h1 id="caching-with-stackexchangeredis">Caching with StackExchange.Redis</h1>
+
+<p>Once you have a ConnectionMultiplexer you can then acquire access to a database. Any will do but database 0 is default. The database object provides the caching options. There are various means of caching in Redis but the simplest and most useful for TraQ7 was to use the String methods, StringSet and StringGet, like the following:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Store and re-use ConnectionMultiplexer. Dispose only when no longer used.</span>
+ <span class="n">ConnectionMultiplexer</span> <span class="n">conn</span> <span class="p">=</span> <span class="n">ConnectionMultiplexer</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">);</span>
+ <span class="n">IDatabase</span> <span class="n">db</span> <span class="p">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">GetDatabase</span><span class="p">();</span>
+ <span class="p">...</span>
+ <span class="kt">string</span> <span class="k">value</span> <span class="p">=</span> <span class="s">"Some Value"</span><span class="p">;</span>
+ <span class="n">db</span><span class="p">.</span><span class="nf">StringSet</span><span class="p">(</span><span class="s">"key1"</span><span class="p">,</span> <span class="k">value</span><span class="p">);</span>
+ <span class="p">...</span>
+ <span class="kt">string</span> <span class="k">value</span> <span class="p">=</span> <span class="n">db</span><span class="p">.</span><span class="nf">StringGet</span><span class="p">(</span><span class="s">"key1"</span><span class="p">);</span>
+ <span class="p">...</span>
+</code></pre></div></div>
+
+<p>Storing and retrieving a string value is easy and was the earliest primary function of Redis for caching.</p>
+
+<h1 id="searching-redis-keys">Searching Redis Keys</h1>
+
+<p>Redis has KEY and SCAN keywords in the CLI for looking up database keys. KEY is typically not recommended in production, but SCAN is considered safe. The StackExchange.Redis client makes the decision on which Redis command to execute for best performance. KEY / SCAN supports glob-style pattern matching which is not the same as RegEx. Glob-style patterns look more like a Linux file search that includes the following patterns (use ' for escape):</p>
+
+<ul>
+  <li>h?llo matches hello, hallo, hxllo, etc</li>
+  <li>h*llo matches hllo, heeeeello, etc.</li>
+  <li>h[ae]llo matches hello and hallo but not anything else like hillo</li>
+  <li>h[^e]llo matches hallo, hbllo, etc but not hello</li>
+  <li>h[a-c]llo matches hallo, hbllo and hcllo</li>
+</ul>
+
+<p>To search for a specific key(s) you need a server object representing the host or maintenance Redis instance. Then a search based on pattern matching can be applied:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">string</span> <span class="n">pattern</span> <span class="p">=</span> <span class="s">"DataTable"</span>
+ <span class="kt">var</span> <span class="n">server</span> <span class="p">=</span> <span class="n">conn</span><span class="p">.</span><span class="nf">GetServer</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">);</span>
+ <span class="kt">var</span> <span class="n">cacheKeys</span> <span class="p">=</span> <span class="n">server</span><span class="p">.</span><span class="nf">Keys</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span><span class="s">$"\*</span><span class="p">{</span><span class="n">pattern</span><span class="p">}</span><span class="s">\*"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="deleting-redis-keys">Deleting Redis Keys</h1>
+
+<p>Keys can be deleted individually or as a whole set:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// Delete a single key</span>
+ <span class="n">Database</span><span class="p">.</span><span class="nf">KeyDelete</span><span class="p">(&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">Key1</span><span class="p">&amp;</span><span class="n">quot</span><span class="p">;);</span>
+
+ <span class="c1">// Delete all keys from database 0</span>
+ <span class="n">server</span><span class="p">.</span><span class="nf">FlushDatabase</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="serialization-of-redis-values">Serialization of Redis Values</h1>
+
+<p>StackExchange.Redis always changes all RedisValue being cached that is not a primitive datatype to a byte array. This is handled in TraQ7 Redis Caching to speed up the process by skipping calls to multiple methods. It is also necessary to specify a JSON setting to preserve all references to help prevent errors due to cycles in the objects being serialized.</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">readonly</span> <span class="n">Encoding</span> <span class="n">_encoding</span> <span class="p">=</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">;</span>
+ <span class="n">JsonSerializerSettings</span> <span class="n">_jsonSettings</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">JsonSerializerSettings</span><span class="p">()</span> <span class="p">{</span> <span class="n">PreserveReferencesHandling</span> <span class="p">=</span> <span class="n">PreserveReferencesHandling</span><span class="p">.</span><span class="n">Objects</span> <span class="p">};</span>
+ <span class="p">...</span>
+ <span class="k">private</span> <span class="kt">byte</span><span class="p">[]</span> <span class="nf">Serialize</span><span class="p">(</span><span class="kt">object</span> <span class="n">item</span><span class="p">)</span>
+ <span class="p">{</span>
+  <span class="kt">var</span> <span class="n">type</span> <span class="p">=</span> <span class="n">item</span><span class="p">?.</span><span class="nf">GetType</span><span class="p">();</span>
+  <span class="kt">var</span> <span class="n">jsonString</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">_jsonSettings</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">_encoding</span><span class="p">.</span><span class="nf">GetBytes</span><span class="p">(</span><span class="n">jsonString</span><span class="p">);</span>
+ <span class="p">}</span>
+
+ <span class="k">private</span> <span class="n">T</span> <span class="n">Deserialize</span><span class="err">\</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">T</span><span class="err">\</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;(</span><span class="kt">byte</span><span class="p">[]</span> <span class="n">serializedObject</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">serializedObject</span> <span class="p">==</span> <span class="k">null</span> <span class="p">||</span> <span class="n">serializedObject</span><span class="p">.</span><span class="n">Length</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+     <span class="k">return</span> <span class="k">default</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+   <span class="kt">var</span> <span class="n">jsonString</span> <span class="p">=</span> <span class="n">_encoding</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="n">serializedObject</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">jsonString</span><span class="p">,</span> <span class="n">_jsonSettings</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="notes">Notes:</h1>
+
+<ul>
+  <li>Make cache services into Singletons at Startup (helps Redis most)</li>
+  <li>Convert serialized objects to byte arrays for faster transaction</li>
+  <li>Use JSON setting PreserveReferencesHandling = PreserveReferencesHandling.Objects to enable serializing complex objects with circular references</li>
+  <li>Redis Keys search pattern is NOT RegEx. Excluding whole words seem to not be possible.</li>
+  <li>Clear the Redis cache when any changes are made to the structure of any classes that are serialized.
+    <ul>
+      <li>Redis-cli.exe FLUSHDB</li>
+      <li>Redis-cli.exe FLUSHALL</li>
+      <li>These work inside the redis-cli client as well.</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Redis, which stands for Remote Dictionary Server, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.]]></summary></entry><entry><title type="html">Integrating HTML5 Canvas In Jekyll</title><link href="http://localhost:4000/integrating_canvas/" rel="alternate" type="text/html" title="Integrating HTML5 Canvas In Jekyll" /><published>2020-05-17T19:30:25-04:00</published><updated>2020-05-17T19:30:25-04:00</updated><id>http://localhost:4000/integrating_canvas</id><content type="html" xml:base="http://localhost:4000/integrating_canvas/"><![CDATA[<p>I was just wondering about integrating the HTML5 canvas into my Software Design blog like 
+I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.</p>
+
+<canvas id="canvas" width="400" height="400" style="background-color:#555">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<p>I saw this clock as a demo a long time ago and I was happily able to reproduce it.
+<script>clock();</script></p>]]></content><author><name></name></author><category term="javascript" /><category term="html" /><summary type="html"><![CDATA[I was just wondering about integrating the HTML5 canvas into my Software Design blog like I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.]]></summary></entry><entry><title type="html">Integrating JavaScript In Jekyll</title><link href="http://localhost:4000/integrating_javascript/" rel="alternate" type="text/html" title="Integrating JavaScript In Jekyll" /><published>2020-05-10T19:24:25-04:00</published><updated>2020-05-10T19:24:25-04:00</updated><id>http://localhost:4000/integrating_javascript</id><content type="html" xml:base="http://localhost:4000/integrating_javascript/"><![CDATA[<p>I was wondering about integrating JavaScript into my Software Design blog and Markdown 
 clearly didn’t support HTML… at least that was what I thought. I still made Jekyll
-import my JavaScript code on my request.&lt;/p&gt;
+import my JavaScript code on my request.</p>
 
-&lt;div style=&quot;width:120px;height:100px;position:relative;left:58px;top:50px;&quot;&gt;
-&lt;div id=&quot;dig1&quot; class=&quot;dig&quot;&gt;1&lt;/div&gt;
-&lt;div id=&quot;dig2&quot; class=&quot;dig&quot;&gt;2&lt;/div&gt;
-&lt;div id=&quot;dig3&quot; class=&quot;dig&quot;&gt;3&lt;/div&gt;
-&lt;div id=&quot;dig4&quot; class=&quot;dig&quot;&gt;4&lt;/div&gt;
-&lt;div id=&quot;dig5&quot; class=&quot;dig&quot;&gt;5&lt;/div&gt;
-&lt;div id=&quot;dig6&quot; class=&quot;dig&quot;&gt;6&lt;/div&gt;
-&lt;div id=&quot;dig7&quot; class=&quot;dig&quot;&gt;7&lt;/div&gt;
-&lt;div id=&quot;dig8&quot; class=&quot;dig&quot;&gt;8&lt;/div&gt;
-&lt;div id=&quot;dig9&quot; class=&quot;dig&quot;&gt;9&lt;/div&gt;
-&lt;div id=&quot;dig10&quot; class=&quot;dig&quot;&gt;10&lt;/div&gt;
-&lt;div id=&quot;dig11&quot; class=&quot;dig&quot;&gt;11&lt;/div&gt;
-&lt;div id=&quot;dig12&quot; class=&quot;dig&quot;&gt;12&lt;/div&gt;
-&lt;div id=&quot;hour1&quot; class=&quot;hour&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;hour2&quot; class=&quot;hour&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;hour3&quot; class=&quot;hour&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;hour4&quot; class=&quot;hour&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;min1&quot; class=&quot;min&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;min2&quot; class=&quot;min&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;min3&quot; class=&quot;min&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;min4&quot; class=&quot;min&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;min5&quot; class=&quot;min&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;sec1&quot; class=&quot;sec&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;sec2&quot; class=&quot;sec&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;sec3&quot; class=&quot;sec&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;sec4&quot; class=&quot;sec&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;sec5&quot; class=&quot;sec&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;sec6&quot; class=&quot;sec&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;script&gt;clock();&lt;/script&gt;
+<div style="width:120px;height:100px;position:relative;left:58px;top:50px;">
+<div id="dig1" class="dig">1</div>
+<div id="dig2" class="dig">2</div>
+<div id="dig3" class="dig">3</div>
+<div id="dig4" class="dig">4</div>
+<div id="dig5" class="dig">5</div>
+<div id="dig6" class="dig">6</div>
+<div id="dig7" class="dig">7</div>
+<div id="dig8" class="dig">8</div>
+<div id="dig9" class="dig">9</div>
+<div id="dig10" class="dig">10</div>
+<div id="dig11" class="dig">11</div>
+<div id="dig12" class="dig">12</div>
+<div id="hour1" class="hour"></div>
+<div id="hour2" class="hour"></div>
+<div id="hour3" class="hour"></div>
+<div id="hour4" class="hour"></div>
+<div id="min1" class="min"></div>
+<div id="min2" class="min"></div>
+<div id="min3" class="min"></div>
+<div id="min4" class="min"></div>
+<div id="min5" class="min"></div>
+<div id="sec1" class="sec"></div>
+<div id="sec2" class="sec"></div>
+<div id="sec3" class="sec"></div>
+<div id="sec4" class="sec"></div>
+<div id="sec5" class="sec"></div>
+<div id="sec6" class="sec"></div>
+</div>
+<script>clock();</script>
 
-&lt;p /&gt;
+<p />
 
-&lt;p&gt;There are several ways to include JavaScript on demand using Jekyll.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;RAW HTML which looked messy but it does work&lt;/li&gt;
-  &lt;li&gt;Modify the header code generated by Jekyll to import JavaScript into the Post&lt;/li&gt;
-  &lt;li&gt;Modify the header code generated by Jekyll to use a script element&lt;/li&gt;
-&lt;/ol&gt;
+<p>There are several ways to include JavaScript on demand using Jekyll.</p>
+<ol>
+  <li>RAW HTML which looked messy but it does work</li>
+  <li>Modify the header code generated by Jekyll to import JavaScript into the Post</li>
+  <li>Modify the header code generated by Jekyll to use a script element</li>
+</ol>
 
-&lt;p&gt;I rejected option 1, though I may use it one day, because it is just messy. Everything 
+<p>I rejected option 1, though I may use it one day, because it is just messy. Everything 
 must be tightly aligned on the left of the text which is okay for something short but
-terrible for longer scripts.&lt;/p&gt;
+terrible for longer scripts.</p>
 
-&lt;p&gt;I rejected option 2 because I seem to prefer having my javascript loaded remotely 
+<p>I rejected option 2 because I seem to prefer having my javascript loaded remotely 
 rather than having it embedded into my page. In the end it isn’t much different than 
-option 3.&lt;/p&gt;
+option 3.</p>
 
-&lt;p&gt;I took the option of having Jekyll generate a separate script element to import 
+<p>I took the option of having Jekyll generate a separate script element to import 
 multiple scripts from a remote location. I just add a tag at the top of the post and 
-my script is loaded and ready to run.&lt;/p&gt;</content><author><name></name></author><category term="javascript" /><summary type="html">I was wondering about integrating JavaScript into my Software Design blog and Markdown clearly didn’t support HTML… at least that was what I thought. I still made Jekyll import my JavaScript code on my request.</summary></entry><entry><title type="html">First Blog Post!</title><link href="http://localhost:4000/first-blog-post/" rel="alternate" type="text/html" title="First Blog Post!" /><published>2020-05-03T19:26:25-04:00</published><updated>2020-05-03T19:26:25-04:00</updated><id>http://localhost:4000/first-blog-post</id><content type="html" xml:base="http://localhost:4000/first-blog-post/">&lt;p&gt;This is my very first blog post – ever! I’m very excited!&lt;/p&gt;
+my script is loaded and ready to run.</p>]]></content><author><name></name></author><category term="javascript" /><summary type="html"><![CDATA[I was wondering about integrating JavaScript into my Software Design blog and Markdown clearly didn’t support HTML… at least that was what I thought. I still made Jekyll import my JavaScript code on my request.]]></summary></entry><entry><title type="html">First Blog Post!</title><link href="http://localhost:4000/first-blog-post/" rel="alternate" type="text/html" title="First Blog Post!" /><published>2020-05-03T19:26:25-04:00</published><updated>2020-05-03T19:26:25-04:00</updated><id>http://localhost:4000/first-blog-post</id><content type="html" xml:base="http://localhost:4000/first-blog-post/"><![CDATA[<p>This is my very first blog post – ever! I’m very excited!</p>
 
-&lt;p&gt;Some things I need to remember:&lt;/p&gt;
+<p>Some things I need to remember:</p>
 
-&lt;ul&gt;
-  &lt;li&gt;This blog is using &lt;a href=&quot;https://kramdown.gettalong.org/quickref.html&quot;&gt;Kramdown&lt;/a&gt; for markdown&lt;/li&gt;
-  &lt;li&gt;It supports &lt;a href=&quot;https://docs.mathjax.org/en/latest/index.html&quot;&gt;MathJax&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The free &lt;a href=&quot;https://fontawesome.com/icons?d=gallery&amp;amp;m=free&quot;&gt;Font Awesome&lt;/a&gt; provides some great icons&lt;/li&gt;
-  &lt;li&gt;This blog uses both “category” (i.e. creates a folder name  work, demo, etc)  and “tag” (i.e. labels a post with  C#, Java, algorithm, etc)  so make good use of them&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>This blog is using <a href="https://kramdown.gettalong.org/quickref.html">Kramdown</a> for markdown</li>
+  <li>It supports <a href="https://docs.mathjax.org/en/latest/index.html">MathJax</a></li>
+  <li>The free <a href="https://fontawesome.com/icons?d=gallery&amp;m=free">Font Awesome</a> provides some great icons</li>
+  <li>This blog uses both “category” (i.e. creates a folder name  work, demo, etc)  and “tag” (i.e. labels a post with  C#, Java, algorithm, etc)  so make good use of them</li>
+</ul>
 
-&lt;p&gt;Let’s see this come to life!&lt;/p&gt;</content><author><name></name></author><summary type="html">This is my very first blog post – ever! I’m very excited!</summary></entry></feed>
+<p>Let’s see this come to life!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[This is my very first blog post – ever! I’m very excited!]]></summary></entry></feed>
