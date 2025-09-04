@@ -150,5 +150,5 @@ Add the following line at the end of the crontab list of tasks. The task runs th
 0,10,20,30,40,50 * * * * CRON=running /svc/docker/ddns.sh
 ```
 
-[Github ddns.sh](https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/ddns.sh)
+[Github ddns.sh](https://github.com/irtheman/coding/blob/e6c24ca507bcbc98e72d60bcf667f9700a6e99aa/bash/ddns.sh)
 
