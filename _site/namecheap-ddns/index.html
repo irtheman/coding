@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Namecheap DDNS | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Namecheap DDNS" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Keeping my NameCheap DDNS IPs updated." />
+<meta property="og:description" content="Keeping my NameCheap DDNS IPs updated." />
+<link rel="canonical" href="http://localhost:4000/namecheap-ddns/" />
+<meta property="og:url" content="http://localhost:4000/namecheap-ddns/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-28T13:03:25-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Namecheap DDNS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-01-28T13:03:25-05:00","datePublished":"2022-01-28T13:03:25-05:00","description":"Keeping my NameCheap DDNS IPs updated.","headline":"Namecheap DDNS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/namecheap-ddns/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/namecheap-ddns/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  namecheap-ddns">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Namecheap DDNS
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">6 min read</span>
+
+    <time class="page-date dt-published" datetime="2022-01-28T13:03:25-05:00"><a class="u-url" href="">January 28, 2022</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#bash" title="Pages tagged bash" rel="tag">bash</a></li>
+  </ul>
+
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <p>Keeping my NameCheap DDNS IPs updated.</p>
+
+<h1 id="namecheap">NameCheap</h1>
+
+<p>Some of my domain names are registered with NameCheap. Like my other registrars, I often use DDNS but NameCheap is a lot more difficult to keep the IP addresses up to date. Rather than use their provided application I made my own a long time ago because it was a fun challenge but I’ve decided to share my DDNS IP address updating script.</p>
+
+<p>As a note, I also have been using an Asus router for many years now. They provide their own DDNS service with their own provider domain named ‘asuscomm.com’. It does come with it’s own SSL certificate also. You get to choose your own subdomain. As an example, mine could be ‘asus-ddns-subdomain’ giving me a final url like ‘asus-ddns-subdomain.asuscomm.com’. My ‘asus-ddns-subdomain.asuscomm.com’ url has the IP address assigned by my internet provider and Asus keeps it up to date. This is so very useful in a huge variety of ways which is one of several reasons I still use an Asus router.</p>
+
+<h3 id="ddnssh-script">DDNS.sh Script</h3>
+<p>The script I’m using is named ddns.sh and I keep it in my docker folder at /svr/docker so it is easy to find and edit when needed. This script will require the use of CRON but it will mostly only be run very quickly without sending any data back to NameCheap unless it becomes necessary.</p>
+
+<h3 id="disable-echo">Disable Echo</h3>
+<p>First I wanted to be able to turn echo off when it isn’t needed. I’m using the environment variable CRON as a flag to turn echo off. For echo, I’m using a variable that starts with the <strong><em>echo</em></strong> command and, if the CRON environment variable is there, the variable changes to “:” which just means “don’t do anything”.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span><span class="o">=</span><span class="s2">"echo"</span>
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$CRON</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">echo</span><span class="o">=</span><span class="s2">":"</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<h3 id="domains-and-subdomains">Domains and Subdomains</h3>
+<p>The next step is to create two arrays, one for the root domains and the other for the subdomains. This has actually made it pretty easy to add new domains or subdomains and the CRON job doesn’t even have to be restarted.</p>
+
+<p>Each array index is the root domain. On NameCheap, every domain has it’s own API Access Key for updating the IP address which is why the need for them to be included here.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Every subdomain, indexed by their own root domain, is also provided here in the script. For NameCheap, the subdomains don’t know the root domain’s IP address so they need to be set individually. Each subdomain here is separated by a ‘</td>
+      <td>’.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Please note, every subdomains element starts with ‘@’. This is the reference to the root domain itself. If you are using this script and have a domain that doesn’t have any subdomains, like ‘domain6.tld’, then you still need to provide the API key, of course, and the subdomains entry must, at the very least, have the ‘@’ listed and, in this case, no ‘</td>
+      <td>’ will be needed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">declare</span> <span class="nt">-A</span> domains
+<span class="nb">declare</span> <span class="nt">-A</span> subdomains
+
+domains[<span class="s2">"domain4.tld"</span><span class="o">]=</span><span class="s2">"random-namecheap-api-key-one"</span>
+domains[<span class="s2">"domain5.tld"</span><span class="o">]=</span><span class="s2">"random-namecheap-api-key-two"</span>
+domains[<span class="s2">"domain3.tld"</span><span class="o">]=</span><span class="s2">"random-namecheap-api-key-three"</span>
+domains[<span class="s2">"domain6.tld"</span><span class="o">]=</span><span class="s2">"random-namecheap-api-key-four"</span>
+
+subdomains[<span class="s2">"domain4.tld"</span><span class="o">]=</span><span class="s2">"@|www.|immich.|nextcloud.|collabora."</span>
+subdomains[<span class="s2">"domain5.tld"</span><span class="o">]=</span><span class="s2">"@|www."</span>
+subdomains[<span class="s2">"domain3.tld"</span><span class="o">]=</span><span class="s2">"@|www."</span>
+subdomains[<span class="s2">"domain6.tld"</span><span class="o">]=</span><span class="s2">"@"</span>
+</code></pre></div></div>
+
+<h3 id="ip-address-found">IP Address Found</h3>
+<p>From here, the script needs to know what the currently assigned IP address is. Well, the script will be using the Asus provided url. The host command gives us a break down of the url provided. Grep find the ‘has address’ part. Awk extracts the IP address. The IP address is then assigned to the local_ip variable.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">ddns</span><span class="o">=</span><span class="s2">"asus-ddns-subdomain.asuscomm.com"</span>
+<span class="nv">local_ip</span><span class="o">=</span><span class="si">$(</span>host <span class="nt">-t</span> a <span class="nv">$ddns</span> | <span class="nb">grep</span> <span class="s2">"has address"</span> | <span class="nb">awk</span> <span class="s1">'{print $4}'</span><span class="si">)</span>
+<span class="nv">$echo</span> <span class="s2">"Local IP: </span><span class="nv">$local_ip</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h3 id="iterating-over-the-domains">Iterating Over The Domains</h3>
+<p>We need to report the new IP address to NameCheap for every root domain. The ‘!’ is saying to return the keys of each element of the array. The script will go through every root domain like this…</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>domain <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="p">!domains[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do</span>
+...
+<span class="k">done</span>
+</code></pre></div></div>
+
+<h3 id="iterating-over-subdomains">Iterating Over Subdomains</h3>
+<p>For each root domain we also need to report the new IP address to NameCheap for every subdomain.
+The script continues by getting the subdomains and splitting them up into an array called ‘hosts’ using the bash ‘declare -a’ operation. The script can then iterate over the subdomains even if it is just an ‘@’.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>domain <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="p">!domains[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+  </span><span class="nv">str</span><span class="o">=</span><span class="k">${</span><span class="nv">subdomains</span><span class="p">[</span><span class="nv">$domain</span><span class="p">]</span><span class="k">}</span>
+  <span class="nv">IFS</span><span class="o">=</span><span class="s1">'|'</span>
+  <span class="nb">declare</span> <span class="nt">-a</span> <span class="nv">hosts</span><span class="o">=(</span><span class="nv">$str</span><span class="o">)</span>
+
+  <span class="k">for </span>host <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">hosts</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do</span>
+  ...
+  <span class="k">done
+done</span>
+</code></pre></div></div>
+
+<h3 id="authoritative-name-servers">Authoritative Name Servers</h3>
+<p>The script needs to determine the authoritative name server for each subdomain as we will be asking that name server what the current IP address is for that subdomain.</p>
+
+<p>Here, if the subdomain, represented as host, is empty then it will be given and ‘@’ just in case. The actual <strong><em>host</em></strong> command is used to find the name server for the subdomain. The result has a lot of information so ‘grep’ looks for the name server part. Just in case there is more than one name server listed the <strong><em>head</em></strong> command gets the first one. The <strong><em>awk</em></strong> command then returns the name server’s name.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hst</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">host</span><span class="p">//@/</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">authoritative_nameservers</span><span class="o">=</span><span class="si">$(</span>host <span class="nt">-t</span> ns <span class="nv">$hst$domain</span> | <span class="nb">grep</span> <span class="s2">"name server"</span> | <span class="nb">head</span> <span class="nt">-n1</span> | <span class="nb">awk</span> <span class="s1">'{print $4}'</span><span class="si">)</span>
+
+<span class="nv">$echo</span> <span class="s2">"Authoritative nameserver for </span><span class="nv">$hst$domain</span><span class="s2">: </span><span class="nv">$authoritative_nameservers</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h3 id="subdomain-ip-address">Subdomain IP Address</h3>
+<p>This seems silly to do things this way when we could just use something like ‘host -t a $hst$domain’ but, in this situation, it is best to get the IP address from the authoritative name server. The <strong><em>dig</em></strong> command is the best way I could find at the time for this purpose.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">resolved_ip</span><span class="o">=</span><span class="si">$(</span>dig +short @<span class="nv">$authoritative_nameservers</span> <span class="nv">$hst$domain</span><span class="si">)</span>
+
+<span class="nv">$echo</span> <span class="s2">"Resolved IP for </span><span class="nv">$hst$domain</span><span class="s2">: </span><span class="nv">$resolved_ip</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h3 id="do-we-need-to-anything">Do We Need To Anything?</h3>
+<p>At this point, we can compare the resolved IP address with the local IP address to determine if anything has changed.
+Regardless of the solution, the subdomain and domain loops continue to their end.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$resolved_ip</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="nv">$local_ip</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nv">$echo</span> <span class="s2">"</span><span class="nv">$domain</span><span class="s2"> records are up to date!"</span>
+<span class="k">else</span>
+  ...
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<h3 id="update-the-namecheap-ddns-ip-address">Update The NameCheap DDNS IP Address</h3>
+<p>If the resolved IP address does not match the local IP address then it is time to tell NameCheap DDNS that the IP address has changed for the current subdomain.</p>
+
+<p>This is done by using their DDNS update API via the <strong><em>curl</em></strong> command. We provide the subdomain, or just an ‘@’ if needed, the root domain, and the “password” that is actually the API Access Key.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">response</span><span class="o">=</span><span class="si">$(</span>curl <span class="nt">-s</span> <span class="s2">"https://dynamicdns.park-your-domain.com/update?host=</span><span class="k">${</span><span class="nv">host</span><span class="p">//./</span><span class="k">}</span><span class="s2">&amp;domain=</span><span class="nv">$domain</span><span class="s2">&amp;password=</span><span class="k">${</span><span class="nv">domains</span><span class="p">[</span><span class="nv">$domain</span><span class="p">]</span><span class="k">}</span><span class="s2">"</span><span class="si">)</span>
+</code></pre></div></div>
+
+<p>Checking the response from the NameCheap API, after trying to update the IP address, for errors is a big help.
+This is best run independently outside of CRON so you can see any error message.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">err_count</span><span class="o">=</span><span class="si">$(</span><span class="nb">grep</span> <span class="nt">-oP</span> <span class="s2">"&lt;ErrCount&gt;</span><span class="se">\K</span><span class="s2">.*(?=&lt;/ErrCount&gt;)"</span> <span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$response</span><span class="s2">"</span><span class="si">)</span>
+<span class="nv">err</span><span class="o">=</span><span class="si">$(</span><span class="nb">grep</span> <span class="nt">-oP</span> <span class="s2">"&lt;Err1&gt;</span><span class="se">\K</span><span class="s2">.*(?=&lt;/Err1&gt;)"</span> <span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$response</span><span class="s2">"</span><span class="si">)</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$err_count</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"0"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">$echo</span> <span class="s2">"API call successful! DNS propagation may take a few minutes..."</span>
+<span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"API call failed! Reason: </span><span class="nv">$err</span><span class="s2">"</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<h3 id="cron-for-ddnssh-script">CRON for DDNS.sh Script</h3>
+<p>CRON will run the script at short intervals watching for my internet service provider changing my IP address since they don’t even tell me when it happens. I’m going to assume you know how to use CRON.</p>
+
+<p>Running ‘crontab -e’ will prompt you to choose your editor if you haven’t used it before.</p>
+
+<p>Add the following line at the end of the crontab list of tasks. The task runs the ddns.sh script every 10 minutes from the top of the hour. You are free to adjust that timing as you want. I’ve seen people using 5 minute intervals, 1 hour intervals, and others. Including ‘CRON=running’, as described above, adds the CRON environment variable to the script telling it to not use echo.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0,10,20,30,40,50 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="nv">CRON</span><span class="o">=</span>running /svc/docker/ddns.sh
+</code></pre></div></div>
+
+<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/ddns.sh">Github ddns.sh</a></p>
+
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnamecheap-ddns%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Namecheap+DDNS%20http%3A%2F%2Flocalhost%3A4000%2Fnamecheap-ddns%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnamecheap-ddns%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=Namecheap+DDNS&url=http%3A%2F%2Flocalhost%3A4000%2Fnamecheap-ddns%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/json-schema/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> JSON Schema
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/data-redaction-replace/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Data Redaction - Replace
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>
