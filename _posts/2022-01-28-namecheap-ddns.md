@@ -30,9 +30,9 @@ The next step is to create two arrays, one for the root domains and the other fo
 
 Each array index is the root domain. On NameCheap, every domain has it's own API Access Key for updating the IP address which is why the need for them to be included here.
 
-Every subdomain, indexed by their own root domain, is also provided here in the script. For NameCheap, the subdomains don't know the root domain's IP address so they need to be set individually. Each subdomain here is separated by a '|'.
+Every subdomain, indexed by their own root domain, is also provided here in the script. For NameCheap, the subdomains don't know the root domain's IP address so they need to be set individually. Each subdomain here is separated by a '\|'.
 
-Please note, every subdomains element starts with '@'. This is the reference to the root domain itself. If you are using this script and have a domain that doesn't have any subdomains, like 'domain6.tld', then you still need to provide the API key, of course, and the subdomains entry must, at the very least, have the '@' listed and, in this case, no '|' will be needed.
+Please note, every subdomains element starts with '@'. This is the reference to the root domain itself. If you are using this script and have a domain that doesn't have any subdomains, like 'domain6.tld', then you still need to provide the API key, of course, and the subdomains entry must, at the very least, have the '@' listed and, in this case, no '\|' will be needed.
 
 ```bash
 declare -A domains
