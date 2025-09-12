@@ -687,18 +687,24 @@ figure.align-center figcaption { text-align: center; }
 
 .responsive-embed-1by1::before { padding-top: 100%; }
 
-.mh-banner { background-color: #252a34; color: #aaa; cursor: pointer; width: 100%; border: none; text-align: center; outline: none; font-size: 10px; }
+:root { --background: #252a34; --banner-color: #aaa; --banner-hover-color: #fff; --banner-link-color: #00adb5; }
 
-.banner-active, .mh-banner:hover { color: #ffffff; }
+.mh-banner { background-color: inherit; color: var(--banner-color); cursor: pointer; width: 100%; border: none; text-align: center; outline: none; font-size: 10px; }
 
-.mh-banner:after { content: '\23f7'; color: white; font-weight: bold; margin-left: 5px; }
+.banner-active, .mh-banner:hover { color: var(--banner-hover-color); }
+
+.mh-banner:after { content: '\23f7'; margin-left: 5px; }
 
 .banner-active:after { content: "\23f6"; }
 
-.mh-banner-content { display: grid; grid-template-columns: repeat(1fr, 12); gap: 5px; padding: 0 18px; max-height: 0; overflow: hidden; font-size: 12px; transition: max-height 0.2s ease-out; background-color: #252a3499; }
+.mh-banner-content { display: grid; grid-template-columns: repeat(1fr, 12); gap: 5px; padding: 0 18px; max-height: 0; overflow: hidden; font-size: 12px; transition: max-height 0.2s ease-out; }
 
 .mh-banner-content > div.mh-banner-content-filler-first { grid-column: 1 / span 5; }
 
 .mh-banner-content > div.mh-banner-content-filler-second { grid-column: 9 / span 4; }
 
 .mh-banner-content > div.mh-banner-content-center { grid-column: 1 / span 12; text-align: center; }
+
+.mh-banner-content a { color: var(--banner-link-color); text-decoration: none; }
+
+.mh-banner-content a:hover { filter: brightness(110%); text-decoration: underline; }

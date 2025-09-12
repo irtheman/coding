@@ -12,7 +12,7 @@ $(document).ready(function () {
             <ul>
                 <li><a href="https://matthewhanna.com">Business Website</a></li>
                 <li><a href="https://matthewhanna.net">Resume Website</a></li>
-                <li><a href="https://blog.matthewhanna.net">Coding Blog</a></li>
+                <li><a href="https://blog.matthewhanna.net">Coding Blog</a> &check;</li>
                 <li><a href="https://matthewhanna.me">Personal Blog</a></li>
             </ul>
         </div>
@@ -26,13 +26,24 @@ $(document).ready(function () {
         </div>
         <div class="mh-banner-content-filler-second">&nbsp;</div>
         <div class="mh-banner-content-center">Feel free to explore and learn more about Matthew's work and interests!</div>
+        <div class="mh-banner-content-center">&nbsp;</div>
     </div>
 `;
 
-    const coll = document.getElementsByClassName("mh-banner");
-    for (let i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
+    if (!header.style.backgroundColor) {
+      header.style.backdropFilter = "brightness(150%)";
+    }
+
+    const banner = header.querySelector(".mh-banner");
+    if (banner) {
+      if (!header.style.color) {
+        header.style.color = window.getComputedStyle(banner).getPropertyValue("color");
+        header.style.backgroundColor = window.getComputedStyle(header).getPropertyValue("background-color");
+        header.style.backdropFilter = "";
+      }
+
+      banner.addEventListener("click", function () {
+        this.classList.toggle("banner-active");
         var content = this.nextElementSibling;
         if (content.style.maxHeight) {
           content.style.maxHeight = null;

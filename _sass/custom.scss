@@ -1,6 +1,16 @@
+:root {
+	--background: #252a34;
+	--banner-color: #aaa;
+	--banner-hover-color: #fff;
+	--banner-link-color: #00adb5;
+}
+
 .mh-banner {
-	background-color: #252a34;
-	color: #aaa;
+	background-color: inherit;
+	//backdrop-filter: brightness(150%);
+	//-moz-backdrop-filter: brightness(150%);
+	//-webkit-backdrop-filter: brightness(150%);
+	color: var(--banner-color);
 	cursor: pointer;
 	width: 100%;
 	border: none;
@@ -11,13 +21,11 @@
 
 .banner-active,
 .mh-banner:hover {
-	color: #ffffff;
+	color: var(--banner-hover-color);
 }
 
 .mh-banner:after {
 	content: '\23f7';
-	color: white;
-	font-weight: bold;
 	margin-left: 5px;
 }
 
@@ -34,7 +42,10 @@
 	overflow: hidden;
 	font-size: 12px;
 	transition: max-height 0.2s ease-out;
-	background-color: #252a3499;
+	//filter: brightness(120%);
+	//backdrop-filter: brightness(150%);
+	//-moz-backdrop-filter: brightness(150%);
+	//-webkit-backdrop-filter: brightness(150%);
 }
 
 .mh-banner-content>div.mh-banner-content-filler-first {
@@ -48,4 +59,14 @@
 .mh-banner-content>div.mh-banner-content-center {
 	grid-column: 1 / span 12;
 	text-align: center;
+}
+
+.mh-banner-content a {
+	color: var(--banner-link-color);
+	text-decoration: none;
+}
+
+.mh-banner-content a:hover {
+	filter: brightness(110%);
+	text-decoration: underline;
 }
