@@ -2,7 +2,7 @@
 layout: post
 title:  'Data Redaction - Replace'
 date:   2025-08-26 15:01:25 -0400
-tags: bash
+tags: bash git
 ---
 Replacing private or redacted information in my repositories.
 

@@ -2,7 +2,7 @@
 layout: post
 title:  'Namecheap DDNS'
 date:   2022-01-28 14:03:25 -0400
-tags: bash
+tags: bash info
 ---
 Keeping my NameCheap DDNS IPs updated.
 

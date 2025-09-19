@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-09-12T16:18:08-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Software Design Blog</title><subtitle>Matthew Hanna&apos;s software design blog.</subtitle><entry><title type="html">Data Redaction</title><link href="http://localhost:4000/data-redaction/" rel="alternate" type="text/html" title="Data Redaction" /><published>2025-08-26T15:03:25-04:00</published><updated>2025-08-26T15:03:25-04:00</updated><id>http://localhost:4000/data-redaction</id><content type="html" xml:base="http://localhost:4000/data-redaction/"><![CDATA[<p>Using data redaction on all my repositories.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-09-18T21:14:43-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Software Design Blog</title><subtitle>Matthew Hanna&apos;s software design blog.</subtitle><entry><title type="html">Data Redaction</title><link href="http://localhost:4000/data-redaction/" rel="alternate" type="text/html" title="Data Redaction" /><published>2025-08-26T15:03:25-04:00</published><updated>2025-08-26T15:03:25-04:00</updated><id>http://localhost:4000/data-redaction</id><content type="html" xml:base="http://localhost:4000/data-redaction/"><![CDATA[<p>Using data redaction on all my repositories.</p>
 
 <h1 id="data-redaction">Data Redaction</h1>
 
@@ -66,7 +66,7 @@ mywebsite.net=domain.tld
 
 <p>What are these search and replace scripts I’m talking about? See ya in the next post!</p>
 
-<p>Post: <a href="https://blog.matthewhanna.net/data-redaction-search">Search For Redacted Data</a></p>]]></content><author><name></name></author><category term="bash" /><summary type="html"><![CDATA[Using data redaction on all my repositories.]]></summary></entry><entry><title type="html">Data Redaction - Search</title><link href="http://localhost:4000/data-redaction-search/" rel="alternate" type="text/html" title="Data Redaction - Search" /><published>2025-08-26T15:02:25-04:00</published><updated>2025-08-26T15:02:25-04:00</updated><id>http://localhost:4000/data-redaction-search</id><content type="html" xml:base="http://localhost:4000/data-redaction-search/"><![CDATA[<p>Searching for private and redacted information in my repositories.</p>
+<p>Post: <a href="https://blog.matthewhanna.net/data-redaction-search">Search For Redacted Data</a></p>]]></content><author><name></name></author><category term="bash" /><category term="git" /><summary type="html"><![CDATA[Using data redaction on all my repositories.]]></summary></entry><entry><title type="html">Data Redaction - Search</title><link href="http://localhost:4000/data-redaction-search/" rel="alternate" type="text/html" title="Data Redaction - Search" /><published>2025-08-26T15:02:25-04:00</published><updated>2025-08-26T15:02:25-04:00</updated><id>http://localhost:4000/data-redaction-search</id><content type="html" xml:base="http://localhost:4000/data-redaction-search/"><![CDATA[<p>Searching for private and redacted information in my repositories.</p>
 
 <h1 id="data-redaction-search-script">Data Redaction Search Script</h1>
 
@@ -136,7 +136,7 @@ done</span> <span class="o">&gt;</span> <span class="nv">$TEMPFILE</span>
 
 <p>Post: <a href="https://blog.matthewhanna.net/data-redaction-replace">Replacing Redacted Data</a></p>
 
-<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/search.sh">Github Search.sh</a></p>]]></content><author><name></name></author><category term="bash" /><summary type="html"><![CDATA[Searching for private and redacted information in my repositories.]]></summary></entry><entry><title type="html">Data Redaction - Replace</title><link href="http://localhost:4000/data-redaction-replace/" rel="alternate" type="text/html" title="Data Redaction - Replace" /><published>2025-08-26T15:01:25-04:00</published><updated>2025-08-26T15:01:25-04:00</updated><id>http://localhost:4000/data-redaction-replace</id><content type="html" xml:base="http://localhost:4000/data-redaction-replace/"><![CDATA[<p>Replacing private or redacted information in my repositories.</p>
+<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/search.sh">Github Search.sh</a></p>]]></content><author><name></name></author><category term="bash" /><category term="git" /><summary type="html"><![CDATA[Searching for private and redacted information in my repositories.]]></summary></entry><entry><title type="html">Data Redaction - Replace</title><link href="http://localhost:4000/data-redaction-replace/" rel="alternate" type="text/html" title="Data Redaction - Replace" /><published>2025-08-26T15:01:25-04:00</published><updated>2025-08-26T15:01:25-04:00</updated><id>http://localhost:4000/data-redaction-replace</id><content type="html" xml:base="http://localhost:4000/data-redaction-replace/"><![CDATA[<p>Replacing private or redacted information in my repositories.</p>
 
 <h1 id="data-redaction-replace-script">Data Redaction Replace Script</h1>
 
@@ -253,7 +253,85 @@ readarray <span class="nt">-t</span> files <span class="o">&lt;&lt;&lt;</span> <
 
 <p>And that is it. I put both search.sh and replace.sh in a git pre-commit hook. These files only need to be changed when there is a new type of folder or file type to ignore when replacing private and redacted information.</p>
 
-<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/replace.sh">Github Replace.sh</a></p>]]></content><author><name></name></author><category term="bash" /><summary type="html"><![CDATA[Replacing private or redacted information in my repositories.]]></summary></entry><entry><title type="html">Namecheap DDNS</title><link href="http://localhost:4000/namecheap-ddns/" rel="alternate" type="text/html" title="Namecheap DDNS" /><published>2022-01-28T13:03:25-05:00</published><updated>2022-01-28T13:03:25-05:00</updated><id>http://localhost:4000/namecheap-ddns</id><content type="html" xml:base="http://localhost:4000/namecheap-ddns/"><![CDATA[<p>Keeping my NameCheap DDNS IPs updated.</p>
+<p><a href="https://github.com/irtheman/coding/blob/6a326433b32770e2c749eabeaf5f460cb7ccc47b/bash/replace.sh">Github Replace.sh</a></p>]]></content><author><name></name></author><category term="bash" /><category term="git" /><summary type="html"><![CDATA[Replacing private or redacted information in my repositories.]]></summary></entry><entry><title type="html">Using A Git Branch In MSBuild</title><link href="http://localhost:4000/msbuild-git-branch/" rel="alternate" type="text/html" title="Using A Git Branch In MSBuild" /><published>2024-09-23T09:33:00-04:00</published><updated>2024-09-23T09:33:00-04:00</updated><id>http://localhost:4000/msbuild-git-branch</id><content type="html" xml:base="http://localhost:4000/msbuild-git-branch/"><![CDATA[<h2 id="project-deployment-challenge">Project Deployment Challenge</h2>
+
+<h3 id="im-just-sharing-experiences">I’m just sharing experiences</h3>
+
+<p>I’ve worked with many teams and my role was mostly as a helper and problem solver. This is what I actually enjoy about my work. Well, that and ETL.</p>
+
+<p>In a new job, I discovered that there was no indication on the server as to what stage of deployment the project was in. Yes, each deployment went to a different server based on the git branch but there was nothing on the server saying what the environment was. This meant I couldn’t use the typical variety of AppSettings configurations. I found that even web.config was blocked on deployment. I asked if we could fix this and the CI/CD pipeline manager said he had no idea how to do that or why it would even be needed. He even advised just modifying the program.cs for each deployment.</p>
+
+<div class="notice">
+  <h4 id="note">Note</h4>
+  <p>IIS servers do allow configuration of environment variables. An environment variable can also be configured using web.config if it isn’t blocked on the server.</p>
+</div>
+
+<h3 id="why-is-this-environment-variable-important">Why is this environment variable important?</h3>
+<p>So, why would this matter? Well, environment variables, like <em>EnvironmentName</em>, can decide what the server environment is going to be like. This can also be used to determine what actions to take in that environment or even provide secret information only the server admin knows.</p>
+
+<p>Like many already do, we should have had different AppSettings configurations to configure each application for it’s current environment. The AppSettings configuration can include things like the application version, what database to use for that stage, where to send the “error” warning email to, where to send the automated application emails, who is to be the initial administrator, where to store files locally, etc. Basically, up until I found a workaround, we had put everything into one appsettings.json for all stages and the project.cs code had to be modified for each deployment. What could go wrong with that?</p>
+
+<p>My AppSettings suggestions were based on Microsoft’s Learning website…</p>
+
+<ul>
+  <li>
+    <p>appsettings.development.json - A developers environment would be radically different as the developer would be using a different database (locally), they might want to disable the application emails being sent out, who the application admin was (the developer obviously), where to store the local files, and more.</p>
+  </li>
+  <li>
+    <p>appsettings.stage.json – The stage environment would be nothing like the developers environment but it should work just like the producation environment. It would of course have it’s own database, some emails might be different, and storing the files would be in a different place on that server.</p>
+  </li>
+  <li>
+    <p>appsettings.production.json – The production environment would be like the stage environment only far more stable. The application server and the database servers should have been faster and more stable as well. Experiments should not have been happening in this environment because they would throw the user’s into appropriate tantrums.</p>
+  </li>
+</ul>
+
+<p>One of these AppSettings versions would be chosen based on the <em>EnvironmentName</em> environment variable.</p>
+
+<h3 id="my-project-hack">My project hack</h3>
+<p>I made a fun change to each of the projects so the proper AppSettings configuration would be used on deployment. It did take the team a while to adjust but the code got a lot cleaner and the deployments were more stable.</p>
+
+<p>Here is the MSBuild modification I made:</p>
+
+<p><strong>Something.csproj</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;PropertyGroup&gt;</span>
+    <span class="nt">&lt;GitBranch&gt;</span>
+       $([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)..\..\.git\HEAD').Replace('ref: refs/heads/', '').Trim())
+    <span class="nt">&lt;/GitBranch&gt;</span>
+  <span class="nt">&lt;/PropertyGroup&gt;</span>
+
+   <span class="nt">&lt;Choose&gt;</span>
+      <span class="nt">&lt;WhenCondition</span><span class="err">="'$(GitBranch)'=='main'And'$(Configuration)'=='Release'"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;PropertyGroup&gt;</span>
+            <span class="nt">&lt;EnvironmentName&gt;</span>Production<span class="nt">&lt;/EnvironmentName&gt;</span>
+         <span class="nt">&lt;/PropertyGroup&gt;</span>
+      <span class="err">&lt;</span>/WhenCondition=&gt;
+      <span class="nt">&lt;WhenCondition</span><span class="err">="'$(GitBranch)'=='develop'And'$(Configuration)'=='Release'"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;PropertyGroup&gt;</span>
+            <span class="nt">&lt;EnvironmentName&gt;</span>Staging<span class="nt">&lt;/EnvironmentName&gt;</span>
+         <span class="nt">&lt;/PropertyGroup&gt;</span>
+      <span class="err">&lt;</span>/WhenCondition=&gt;
+      <span class="nt">&lt;Otherwise&gt;</span>
+         <span class="nt">&lt;PropertyGroup&gt;</span>
+            <span class="nt">&lt;EnvironmentName&gt;</span>Development<span class="nt">&lt;/EnvironmentName&gt;</span>
+         <span class="nt">&lt;/PropertyGroup&gt;</span>
+      <span class="nt">&lt;/Otherwise&gt;</span>
+   <span class="nt">&lt;/Choose&gt;</span>
+</code></pre></div></div>
+<p>What is happening here is that, in <strong>GitBranch</strong>, I’m having MSBuild look for the .git folder and then read the HEAD file. Using the String.Replace() function, ‘ref: refs/heads/’ is removed leaving just the branch name. The branch name is trimmed and then stored in the <strong>GitBranch</strong> custom property.</p>
+
+<p><strong>Choose</strong> is a feature MSBuild supports in csproj files and it lets the developer make a choice based on the property being used. In this project, ‘main’ was used for production, ‘develop’ was used for stage, and thus anything not ‘Release’ would be a ‘Development’ environment. The <strong>WhenCondition</strong> simply evaluates <strong>GitBranch</strong> and <strong>Configuration</strong> as strings and compares them to the conditions that should be met. When chosen, the <em>EnvironmentName</em> environment variable gets set. It is basically like a C# switch statement or expression.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Environment</span><span class="p">.</span><span class="nf">SetEnvironmentVariable</span><span class="p">(</span><span class="s">"EnvironmentName"</span><span class="p">,</span>
+  <span class="p">(</span><span class="n">GitBranch</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">)</span> <span class="k">switch</span>
+  <span class="p">{</span>
+    <span class="p">(</span><span class="s">"main"</span><span class="p">,</span> <span class="s">"Release"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Production"</span><span class="p">,</span>
+    <span class="p">(</span><span class="s">"develop"</span><span class="p">,</span> <span class="s">"Release"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Staging"</span><span class="p">,</span>
+    <span class="n">_</span> <span class="p">=&gt;</span> <span class="s">"Development"</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>While the rest of the team were getting paid more than I was, I admit that I was hired to help them fix problems and help migrate old applications. I love helping and I’m not criticizing the team here, though it might sound like it. I like helping a team that listens.</p>]]></content><author><name></name></author><category term="C#" /><category term="Git" /><category term="Drama" /><summary type="html"><![CDATA[Project Deployment Challenge]]></summary></entry><entry><title type="html">Namecheap DDNS</title><link href="http://localhost:4000/namecheap-ddns/" rel="alternate" type="text/html" title="Namecheap DDNS" /><published>2022-01-28T13:03:25-05:00</published><updated>2022-01-28T13:03:25-05:00</updated><id>http://localhost:4000/namecheap-ddns</id><content type="html" xml:base="http://localhost:4000/namecheap-ddns/"><![CDATA[<p>Keeping my NameCheap DDNS IPs updated.</p>
 
 <h1 id="namecheap">NameCheap</h1>
 
@@ -388,7 +466,7 @@ This is best run independently outside of CRON so you can see any error message.
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0,10,20,30,40,50 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="nv">CRON</span><span class="o">=</span>running /svc/docker/ddns.sh
 </code></pre></div></div>
 
-<p><a href="https://github.com/irtheman/coding/blob/e6c24ca507bcbc98e72d60bcf667f9700a6e99aa/bash/ddns.sh">Github ddns.sh</a></p>]]></content><author><name></name></author><category term="bash" /><summary type="html"><![CDATA[Keeping my NameCheap DDNS IPs updated.]]></summary></entry><entry><title type="html">JSON Schema</title><link href="http://localhost:4000/json-schema/" rel="alternate" type="text/html" title="JSON Schema" /><published>2021-10-21T15:01:25-04:00</published><updated>2021-10-21T15:01:25-04:00</updated><id>http://localhost:4000/json-schema</id><content type="html" xml:base="http://localhost:4000/json-schema/"><![CDATA[<h2 id="json-standards">JSON Standards</h2>
+<p><a href="https://github.com/irtheman/coding/blob/e6c24ca507bcbc98e72d60bcf667f9700a6e99aa/bash/ddns.sh">Github ddns.sh</a></p>]]></content><author><name></name></author><category term="bash" /><category term="info" /><summary type="html"><![CDATA[Keeping my NameCheap DDNS IPs updated.]]></summary></entry><entry><title type="html">JSON Schema</title><link href="http://localhost:4000/json-schema/" rel="alternate" type="text/html" title="JSON Schema" /><published>2021-10-21T15:01:25-04:00</published><updated>2021-10-21T15:01:25-04:00</updated><id>http://localhost:4000/json-schema</id><content type="html" xml:base="http://localhost:4000/json-schema/"><![CDATA[<h2 id="json-standards">JSON Standards</h2>
 
 <p>Most people are not aware that there are standards for JSON – or lots of other things in the software development 
 world. Let’s have a look; if you are a learner this will push you forward…</p>
@@ -561,7 +639,7 @@ annotations like ‘contentMediaType’ and ‘contentEncoding’.</p>
 
 <p>Specification: <a href="https://json-schema.org/specification.html">https://json-schema.org/specification.html</a></p>
 
-<p>If you need help making a JSON schema: <a href="https://jsonschema.net/">https://jsonschema.net/</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[JSON Standards]]></summary></entry><entry><title type="html">SOLID</title><link href="http://localhost:4000/solid/" rel="alternate" type="text/html" title="SOLID" /><published>2020-10-07T16:28:25-04:00</published><updated>2020-10-07T16:28:25-04:00</updated><id>http://localhost:4000/solid</id><content type="html" xml:base="http://localhost:4000/solid/"><![CDATA[<p>SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin</p>
+<p>If you need help making a JSON schema: <a href="https://jsonschema.net/">https://jsonschema.net/</a></p>]]></content><author><name></name></author><category term="info" /><summary type="html"><![CDATA[JSON Standards]]></summary></entry><entry><title type="html">SOLID</title><link href="http://localhost:4000/solid/" rel="alternate" type="text/html" title="SOLID" /><published>2020-10-07T16:28:25-04:00</published><updated>2020-10-07T16:28:25-04:00</updated><id>http://localhost:4000/solid</id><content type="html" xml:base="http://localhost:4000/solid/"><![CDATA[<p>SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin</p>
 
 <ul id="markdown-toc">
   <li><a href="#what-is-solid" id="markdown-toc-what-is-solid">What is SOLID?</a></li>
@@ -981,7 +1059,7 @@ ___</p>
 <span class="c1">// Usage:</span>
 <span class="n">Aggregator</span> <span class="n">agg1</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="k">new</span> <span class="nf">FileLogger</span><span class="p">());</span>
 <span class="n">Aggregator</span> <span class="n">agg2</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Aggregator</span><span class="p">(</span><span class="k">new</span> <span class="nf">ConsoleLogger</span><span class="p">());</span>
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin]]></summary></entry><entry><title type="html">CQRS</title><link href="http://localhost:4000/cqrs/" rel="alternate" type="text/html" title="CQRS" /><published>2020-10-06T16:27:25-04:00</published><updated>2020-10-06T16:27:25-04:00</updated><id>http://localhost:4000/cqrs</id><content type="html" xml:base="http://localhost:4000/cqrs/"><![CDATA[<p>CQRS is a Command, Query, Responsibility and Segregation design pattern.</p>
+</code></pre></div></div>]]></content><author><name></name></author><category term="cs" /><category term="info" /><summary type="html"><![CDATA[SOLID is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin]]></summary></entry><entry><title type="html">CQRS</title><link href="http://localhost:4000/cqrs/" rel="alternate" type="text/html" title="CQRS" /><published>2020-10-06T16:27:25-04:00</published><updated>2020-10-06T16:27:25-04:00</updated><id>http://localhost:4000/cqrs</id><content type="html" xml:base="http://localhost:4000/cqrs/"><![CDATA[<p>CQRS is a Command, Query, Responsibility and Segregation design pattern.</p>
 
 <p>CQRS (Command Query Responsibility Segregation) is a powerful architectural pattern that seems to cause quite a lot of confusion; it breaks from the norms most developers cling to by segregating the read and write operations with interfaces (check out <a href="https://blog.matthewhanna.net/solid">SOLID</a> to see how this improves performance, connections, and maintenance). With the popularity of micro-services and the event-based programming model, it is important to know what CQRS is. This is a potentially good option for working with large complicated databases.</p>
 
@@ -1027,7 +1105,7 @@ ___</p>
 longer have to be concerned about details outside of their domain. Also, another nice thing about CQRS is there is no requirement for Event Sourcing. Commands are in effect streams of events that are persisted in the command part of the CQRS system. Queries only see and interpret these events once the data source is updated; no early peeks or corrupted data. In an event-driver distributed system like that seen in services or desktop applications there must be constant messages being passed around to keep changes orchestrated. Using the same domain 
 model, or not separating these responsibilities, would be a mistake.</p>
 
-<p>Finally, in summary, for most non-trivial systems it is not necessary to implement CQRS. In micro-services, the CRUD system is fine when the system’s purpose is very focused on a common task like instant messaging, creating a meme repository or maybe having a driving app. Adding complexity like a myriad of unrelated tasks, a complex multi-purpose database, or other trivial complications makes CRUD more difficult. The added complexity may end up detrimental to the system design. Plan carefully and be ready for the future.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[CQRS is a Command, Query, Responsibility and Segregation design pattern.]]></summary></entry><entry><title type="html">Redis Cache</title><link href="http://localhost:4000/redis-cache/" rel="alternate" type="text/html" title="Redis Cache" /><published>2020-10-05T15:46:25-04:00</published><updated>2020-10-05T15:46:25-04:00</updated><id>http://localhost:4000/redis-cache</id><content type="html" xml:base="http://localhost:4000/redis-cache/"><![CDATA[<p>Redis, which stands for <strong>Re</strong>mote <strong>Di</strong>ctionary <strong>S</strong>erver, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.</p>
+<p>Finally, in summary, for most non-trivial systems it is not necessary to implement CQRS. In micro-services, the CRUD system is fine when the system’s purpose is very focused on a common task like instant messaging, creating a meme repository or maybe having a driving app. Adding complexity like a myriad of unrelated tasks, a complex multi-purpose database, or other trivial complications makes CRUD more difficult. The added complexity may end up detrimental to the system design. Plan carefully and be ready for the future.</p>]]></content><author><name></name></author><category term="info" /><summary type="html"><![CDATA[CQRS is a Command, Query, Responsibility and Segregation design pattern.]]></summary></entry><entry><title type="html">Redis Cache</title><link href="http://localhost:4000/redis-cache/" rel="alternate" type="text/html" title="Redis Cache" /><published>2020-10-05T15:46:25-04:00</published><updated>2020-10-05T15:46:25-04:00</updated><id>http://localhost:4000/redis-cache</id><content type="html" xml:base="http://localhost:4000/redis-cache/"><![CDATA[<p>Redis, which stands for <strong>Re</strong>mote <strong>Di</strong>ctionary <strong>S</strong>erver, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.</p>
 
 <h1 id="what-is-redis-cache">What is Redis Cache?</h1>
 
@@ -1186,65 +1264,22 @@ model, or not separating these responsibilities, would be a mistake.</p>
       <li>These work inside the redis-cli client as well.</li>
     </ul>
   </li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Redis, which stands for Remote Dictionary Server, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.]]></summary></entry><entry><title type="html">Integrating HTML5 Canvas In Jekyll</title><link href="http://localhost:4000/integrating_canvas/" rel="alternate" type="text/html" title="Integrating HTML5 Canvas In Jekyll" /><published>2020-05-17T19:30:25-04:00</published><updated>2020-05-17T19:30:25-04:00</updated><id>http://localhost:4000/integrating_canvas</id><content type="html" xml:base="http://localhost:4000/integrating_canvas/"><![CDATA[<p>I was just wondering about integrating the HTML5 canvas into my Software Design blog like 
+</ul>]]></content><author><name></name></author><category term="cs" /><category term="info" /><summary type="html"><![CDATA[Redis, which stands for Remote Dictionary Server, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.]]></summary></entry><entry><title type="html">Integrating HTML5 Canvas In Jekyll</title><link href="http://localhost:4000/integrating_canvas/" rel="alternate" type="text/html" title="Integrating HTML5 Canvas In Jekyll" /><published>2020-05-17T19:30:25-04:00</published><updated>2020-05-17T19:30:25-04:00</updated><id>http://localhost:4000/integrating_canvas</id><content type="html" xml:base="http://localhost:4000/integrating_canvas/"><![CDATA[<p>I was just wondering about integrating the HTML5 canvas into my Software Design blog like 
 I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.</p>
 
-<canvas id="canvas" width="400" height="400" style="background-color:#555">
-Your browser does not support the HTML5 canvas tag.</canvas>
-
-<p>I saw this clock as a demo a long time ago and I was happily able to reproduce it.
-<script>clock();</script></p>]]></content><author><name></name></author><category term="javascript" /><category term="html" /><summary type="html"><![CDATA[I was just wondering about integrating the HTML5 canvas into my Software Design blog like I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.]]></summary></entry><entry><title type="html">Integrating JavaScript In Jekyll</title><link href="http://localhost:4000/integrating_javascript/" rel="alternate" type="text/html" title="Integrating JavaScript In Jekyll" /><published>2020-05-10T19:24:25-04:00</published><updated>2020-05-10T19:24:25-04:00</updated><id>http://localhost:4000/integrating_javascript</id><content type="html" xml:base="http://localhost:4000/integrating_javascript/"><![CDATA[<p>I was wondering about integrating JavaScript into my Software Design blog and Markdown 
-clearly didn’t support HTML… at least that was what I thought. I still made Jekyll
-import my JavaScript code on my request.</p>
-
-<div style="width:120px;height:100px;position:relative;left:58px;top:50px;">
-<div id="dig1" class="dig">1</div>
-<div id="dig2" class="dig">2</div>
-<div id="dig3" class="dig">3</div>
-<div id="dig4" class="dig">4</div>
-<div id="dig5" class="dig">5</div>
-<div id="dig6" class="dig">6</div>
-<div id="dig7" class="dig">7</div>
-<div id="dig8" class="dig">8</div>
-<div id="dig9" class="dig">9</div>
-<div id="dig10" class="dig">10</div>
-<div id="dig11" class="dig">11</div>
-<div id="dig12" class="dig">12</div>
-<div id="hour1" class="hour"></div>
-<div id="hour2" class="hour"></div>
-<div id="hour3" class="hour"></div>
-<div id="hour4" class="hour"></div>
-<div id="min1" class="min"></div>
-<div id="min2" class="min"></div>
-<div id="min3" class="min"></div>
-<div id="min4" class="min"></div>
-<div id="min5" class="min"></div>
-<div id="sec1" class="sec"></div>
-<div id="sec2" class="sec"></div>
-<div id="sec3" class="sec"></div>
-<div id="sec4" class="sec"></div>
-<div id="sec5" class="sec"></div>
-<div id="sec6" class="sec"></div>
+<div id="loading">
+  <p><strong>Loading...</strong></p>
 </div>
-<script>clock();</script>
 
-<p />
+<canvas id="canvas" width="400" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: none;">
+        Your browser does not support the HTML5 canvas tag.
+</canvas>
 
-<p>There are several ways to include JavaScript on demand using Jekyll.</p>
-<ol>
-  <li>RAW HTML which looked messy but it does work</li>
-  <li>Modify the header code generated by Jekyll to import JavaScript into the Post</li>
-  <li>Modify the header code generated by Jekyll to use a script element</li>
-</ol>
+<p>I could have also added the canvas into the page using Kramdown…</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;canvas&gt;Your browser does not support the HTML5 canvas tag.&lt;/canvas&gt;
+{: #canvas width="400" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: none;"}
+</code></pre></div></div>
 
-<p>I rejected option 1, though I may use it one day, because it is just messy. Everything 
-must be tightly aligned on the left of the text which is okay for something short but
-terrible for longer scripts.</p>
+<p>I saw this clock as a demo a long time ago and I was happily able to reproduce it.</p>
 
-<p>I rejected option 2 because I seem to prefer having my javascript loaded remotely 
-rather than having it embedded into my page. In the end it isn’t much different than 
-option 3.</p>
-
-<p>I took the option of having Jekyll generate a separate script element to import 
-multiple scripts from a remote location. I just add a tag at the top of the post and 
-my script is loaded and ready to run.</p>]]></content><author><name></name></author><category term="javascript" /><summary type="html"><![CDATA[I was wondering about integrating JavaScript into my Software Design blog and Markdown clearly didn’t support HTML… at least that was what I thought. I still made Jekyll import my JavaScript code on my request.]]></summary></entry></feed>
+<script>document.addEventListener("DOMContentLoaded",function () { clock() });</script>]]></content><author><name></name></author><category term="javascript" /><summary type="html"><![CDATA[I was just wondering about integrating the HTML5 canvas into my Software Design blog like I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.]]></summary></entry></feed>

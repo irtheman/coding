@@ -26,6 +26,7 @@ $(document).ready(function () {
         </div>
         <div class="mh-banner-content-filler-second">&nbsp;</div>
         <div class="mh-banner-content-center">Feel free to explore and learn more about Matthew's work and interests!</div>
+        <div class="mh-banner-content-center"><small>Please note, these websites are hobbies and not constantly maintained due to preferences for working.</small></div>
         <div class="mh-banner-content-center">&nbsp;</div>
     </div>
 `;

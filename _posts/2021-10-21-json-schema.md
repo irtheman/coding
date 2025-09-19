@@ -2,6 +2,7 @@
 layout: post
 title:  'JSON Schema'
 date:   2021-10-21 15:01:25 -0400
+tags: info
 ---
 ## JSON Standards
 

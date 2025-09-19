@@ -2,6 +2,7 @@
 layout: post
 title:  "Redis Cache"
 date:   2020-10-05 15:46:25 -0400
+tags: cs info
 ---
 Redis, which stands for **Re**mote **Di**ctionary **S**erver, is a fast, open-source, in-memory key-value data store for use as a database, cache, message broker, and queue.
 

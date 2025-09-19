@@ -16,6 +16,7 @@ $(document).ready(function () {
   $("a[href$='.jpg'], a[href$='.png'], a[href$='.gif']").attr("data-lity", "");
 
   // banner
+  /*
   const header = document.querySelector("header");
   if (header) {
     header.innerHTML = `
@@ -58,4 +59,5 @@ $(document).ready(function () {
       });
     }
   }
+*/
 });

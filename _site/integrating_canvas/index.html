@@ -133,7 +133,7 @@
 
         
   <h3 class="page-taxonomies-title">Tags</h3>
-  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#javascript" title="Pages tagged javascript" rel="tag">javascript</a></li><li class="page-taxonomy"><a href="/tags/#html" title="Pages tagged html" rel="tag">html</a></li>
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#javascript" title="Pages tagged javascript" rel="tag">javascript</a></li>
   </ul>
 
 
@@ -144,11 +144,23 @@
           <p>I was just wondering about integrating the HTML5 canvas into my Software Design blog like 
 I did with JavaScript last week. Canvas is still basically JavaScript with a Canvas element.</p>
 
-<canvas id="canvas" width="400" height="400" style="background-color:#555">
-Your browser does not support the HTML5 canvas tag.</canvas>
+<div id="loading">
+  <p><strong>Loading...</strong></p>
+</div>
 
-<p>I saw this clock as a demo a long time ago and I was happily able to reproduce it.
-<script>clock();</script></p>
+<canvas id="canvas" width="400" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: none;">
+        Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<p>I could have also added the canvas into the page using Kramdown…</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;canvas&gt;Your browser does not support the HTML5 canvas tag.&lt;/canvas&gt;
+{: #canvas width="400" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: none;"}
+</code></pre></div></div>
+
+<p>I saw this clock as a demo a long time ago and I was happily able to reproduce it.</p>
+
+<script>document.addEventListener("DOMContentLoaded",function () { clock() });</script>
+
 
         </div>
 

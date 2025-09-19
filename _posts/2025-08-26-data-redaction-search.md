@@ -2,7 +2,7 @@
 layout: post
 title:  'Data Redaction - Search'
 date:   2025-08-26 15:02:25 -0400
-tags: bash
+tags: bash git
 ---
 Searching for private and redacted information in my repositories.
 

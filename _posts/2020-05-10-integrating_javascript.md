@@ -9,40 +9,41 @@ css-list:
  - "/assets/css/clock1.css"
 ---
 I was wondering about integrating JavaScript into my Software Design blog and Markdown 
-clearly didn't support HTML... at least that was what I thought. I still made Jekyll
-import my JavaScript code on my request.
+clearly didn't support HTML at this time... at least that was what I thought.
 
-<div style="width:120px;height:100px;position:relative;left:58px;top:50px;">
-<div id="dig1" class="dig">1</div>
-<div id="dig2" class="dig">2</div>
-<div id="dig3" class="dig">3</div>
-<div id="dig4" class="dig">4</div>
-<div id="dig5" class="dig">5</div>
-<div id="dig6" class="dig">6</div>
-<div id="dig7" class="dig">7</div>
-<div id="dig8" class="dig">8</div>
-<div id="dig9" class="dig">9</div>
-<div id="dig10" class="dig">10</div>
-<div id="dig11" class="dig">11</div>
-<div id="dig12" class="dig">12</div>
-<div id="hour1" class="hour"></div>
-<div id="hour2" class="hour"></div>
-<div id="hour3" class="hour"></div>
-<div id="hour4" class="hour"></div>
-<div id="min1" class="min"></div>
-<div id="min2" class="min"></div>
-<div id="min3" class="min"></div>
-<div id="min4" class="min"></div>
-<div id="min5" class="min"></div>
-<div id="sec1" class="sec"></div>
-<div id="sec2" class="sec"></div>
-<div id="sec3" class="sec"></div>
-<div id="sec4" class="sec"></div>
-<div id="sec5" class="sec"></div>
-<div id="sec6" class="sec"></div>
+<div id="clock-container">
+  <div id="clock-display">
+    <div id="dig1" class="dig">1</div>
+    <div id="dig2" class="dig">2</div>
+    <div id="dig3" class="dig">3</div>
+    <div id="dig4" class="dig">4</div>
+    <div id="dig5" class="dig">5</div>
+    <div id="dig6" class="dig">6</div>
+    <div id="dig7" class="dig">7</div>
+    <div id="dig8" class="dig">8</div>
+    <div id="dig9" class="dig">9</div>
+    <div id="dig10" class="dig">10</div>
+    <div id="dig11" class="dig">11</div>
+    <div id="dig12" class="dig">12</div>
+    <div id="hour1" class="hour"></div>
+    <div id="hour2" class="hour"></div>
+    <div id="hour3" class="hour"></div>
+    <div id="hour4" class="hour"></div>
+    <div id="min1" class="min"></div>
+    <div id="min2" class="min"></div>
+    <div id="min3" class="min"></div>
+    <div id="min4" class="min"></div>
+    <div id="min5" class="min"></div>
+    <div id="sec1" class="sec"></div>
+    <div id="sec2" class="sec"></div>
+    <div id="sec3" class="sec"></div>
+    <div id="sec4" class="sec"></div>
+    <div id="sec5" class="sec"></div>
+    <div id="sec6" class="sec"></div>
+  </div>
 </div>
-<script>clock();</script>
-<p/>
+
+<p>&nbsp;</p>
 
 There are several ways to include JavaScript on demand using Jekyll.
 1. RAW HTML which looked messy but it does work
@@ -53,11 +54,39 @@ I rejected option 1, though I may use it one day, because it is just messy. Ever
 must be tightly aligned on the left of the text which is okay for something short but
 terrible for longer scripts.
 
-I rejected option 2 because I seem to prefer having my javascript loaded remotely 
+I rejected option 2 because I seem to prefer having my javascript loaded 
 rather than having it embedded into my page. In the end it isn't much different than 
 option 3.
 
 I took the option of having Jekyll generate a separate script element to import 
-multiple scripts from a remote location. I just add a tag at the top of the post and 
+multiple scripts from local or remote. I just add a property at the top of the post and 
 my script is loaded and ready to run.
 
+The _js-list_ and _css-list_ properties are now part of any page that needs to use a different JavaScript or CSS file.
+
+```
+---
+layout: post
+title:  "Integrating JavaScript In Jekyll"
+date:   2020-05-10 16:24:25 -0700
+tags: javascript
+js-list:
+ - "/assets/js/clock1.js"
+css-list:
+ - "/assets/css/clock1.css"
+---
+```
+
+The jekyll script I added to the custom header portion looks like this...
+
+```
+{% for js in page.js-list %}
+  <script src="{{ js }}"></script>
+{% endfor %}
+
+{% for css in page.css-list %}
+  <link href="{{ css }}" rel="stylesheet">
+{% endfor %}
+```
+
+<script>document.addEventListener("DOMContentLoaded",function () { clock() });</script>

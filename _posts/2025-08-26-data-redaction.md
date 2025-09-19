@@ -2,7 +2,7 @@
 layout: post
 title:  'Data Redaction'
 date:   2025-08-26 15:03:25 -0400
-tags: bash
+tags: bash git
 ---
 Using data redaction on all my repositories.
 
