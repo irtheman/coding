@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Using A Git Branch In MSBuild | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Using A Git Branch In MSBuild" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Project Deployment Challenge" />
+<meta property="og:description" content="Project Deployment Challenge" />
+<link rel="canonical" href="http://localhost:4000/msbuild-git-branch/" />
+<meta property="og:url" content="http://localhost:4000/msbuild-git-branch/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-09-23T09:33:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Using A Git Branch In MSBuild" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-23T09:33:00-04:00","datePublished":"2024-09-23T09:33:00-04:00","description":"Project Deployment Challenge","headline":"Using A Git Branch In MSBuild","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/msbuild-git-branch/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/msbuild-git-branch/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  using-a-git-branch-in-msbuild">
+    <header>&nbsp;</header>
+    
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">Using A Git Branch In MSBuild
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">3 min read</span>
+
+    <time class="page-date dt-published" datetime="2024-09-23T09:33:00-04:00"><a class="u-url" href="">September 23, 2024</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#c" title="Pages tagged C#" rel="tag">C#</a></li><li class="page-taxonomy"><a href="/tags/#git" title="Pages tagged Git" rel="tag">Git</a></li><li class="page-taxonomy"><a href="/tags/#drama" title="Pages tagged Drama" rel="tag">Drama</a></li>
+  </ul>
+
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <h2 id="project-deployment-challenge">Project Deployment Challenge</h2>
+
+<h3 id="im-just-sharing-experiences">I’m just sharing experiences</h3>
+
+<p>I’ve worked with many teams and my role was mostly as a helper and problem solver. This is what I actually enjoy about my work. Well, that and ETL.</p>
+
+<p>In a new job, I discovered that there was no indication on the server as to what stage of deployment the project was in. Yes, each deployment went to a different server based on the git branch but there was nothing on the server saying what the environment was. This meant I couldn’t use the typical variety of AppSettings configurations. I found that even web.config was blocked on deployment. I asked if we could fix this and the CI/CD pipeline manager said he had no idea how to do that or why it would even be needed. He even advised just modifying the program.cs for each deployment.</p>
+
+<div class="notice">
+  <h4 id="note">Note</h4>
+  <p>IIS servers do allow configuration of environment variables. An environment variable can also be configured using web.config if it isn’t blocked on the server.</p>
+</div>
+
+<h3 id="why-is-this-environment-variable-important">Why is this environment variable important?</h3>
+<p>So, why would this matter? Well, environment variables, like <em>EnvironmentName</em>, can decide what the server environment is going to be like. This can also be used to determine what actions to take in that environment or even provide secret information only the server admin knows.</p>
+
+<p>Like many already do, we should have had different AppSettings configurations to configure each application for it’s current environment. The AppSettings configuration can include things like the application version, what database to use for that stage, where to send the “error” warning email to, where to send the automated application emails, who is to be the initial administrator, where to store files locally, etc. Basically, up until I found a workaround, we had put everything into one appsettings.json for all stages and the project.cs code had to be modified for each deployment. What could go wrong with that?</p>
+
+<p>My AppSettings suggestions were based on Microsoft’s Learning website…</p>
+
+<ul>
+  <li>
+    <p>appsettings.development.json - A developers environment would be radically different as the developer would be using a different database (locally), they might want to disable the application emails being sent out, who the application admin was (the developer obviously), where to store the local files, and more.</p>
+  </li>
+  <li>
+    <p>appsettings.stage.json – The stage environment would be nothing like the developers environment but it should work just like the producation environment. It would of course have it’s own database, some emails might be different, and storing the files would be in a different place on that server.</p>
+  </li>
+  <li>
+    <p>appsettings.production.json – The production environment would be like the stage environment only far more stable. The application server and the database servers should have been faster and more stable as well. Experiments should not have been happening in this environment because they would throw the user’s into appropriate tantrums.</p>
+  </li>
+</ul>
+
+<p>One of these AppSettings versions would be chosen based on the <em>EnvironmentName</em> environment variable.</p>
+
+<h3 id="my-project-hack">My project hack</h3>
+<p>I made a fun change to each of the projects so the proper AppSettings configuration would be used on deployment. It did take the team a while to adjust but the code got a lot cleaner and the deployments were more stable.</p>
+
+<p>Here is the MSBuild modification I made:</p>
+
+<p><strong>Something.csproj</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;PropertyGroup&gt;</span>
+    <span class="nt">&lt;GitBranch&gt;</span>
+       $([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)..\..\.git\HEAD').Replace('ref: refs/heads/', '').Trim())
+    <span class="nt">&lt;/GitBranch&gt;</span>
+  <span class="nt">&lt;/PropertyGroup&gt;</span>
+
+   <span class="nt">&lt;Choose&gt;</span>
+      <span class="nt">&lt;WhenCondition</span><span class="err">="'$(GitBranch)'=='main'And'$(Configuration)'=='Release'"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;PropertyGroup&gt;</span>
+            <span class="nt">&lt;EnvironmentName&gt;</span>Production<span class="nt">&lt;/EnvironmentName&gt;</span>
+         <span class="nt">&lt;/PropertyGroup&gt;</span>
+      <span class="err">&lt;</span>/WhenCondition=&gt;
+      <span class="nt">&lt;WhenCondition</span><span class="err">="'$(GitBranch)'=='develop'And'$(Configuration)'=='Release'"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;PropertyGroup&gt;</span>
+            <span class="nt">&lt;EnvironmentName&gt;</span>Staging<span class="nt">&lt;/EnvironmentName&gt;</span>
+         <span class="nt">&lt;/PropertyGroup&gt;</span>
+      <span class="err">&lt;</span>/WhenCondition=&gt;
+      <span class="nt">&lt;Otherwise&gt;</span>
+         <span class="nt">&lt;PropertyGroup&gt;</span>
+            <span class="nt">&lt;EnvironmentName&gt;</span>Development<span class="nt">&lt;/EnvironmentName&gt;</span>
+         <span class="nt">&lt;/PropertyGroup&gt;</span>
+      <span class="nt">&lt;/Otherwise&gt;</span>
+   <span class="nt">&lt;/Choose&gt;</span>
+</code></pre></div></div>
+<p>What is happening here is that, in <strong>GitBranch</strong>, I’m having MSBuild look for the .git folder and then read the HEAD file. Using the String.Replace() function, ‘ref: refs/heads/’ is removed leaving just the branch name. The branch name is trimmed and then stored in the <strong>GitBranch</strong> custom property.</p>
+
+<p><strong>Choose</strong> is a feature MSBuild supports in csproj files and it lets the developer make a choice based on the property being used. In this project, ‘main’ was used for production, ‘develop’ was used for stage, and thus anything not ‘Release’ would be a ‘Development’ environment. The <strong>WhenCondition</strong> simply evaluates <strong>GitBranch</strong> and <strong>Configuration</strong> as strings and compares them to the conditions that should be met. When chosen, the <em>EnvironmentName</em> environment variable gets set. It is basically like a C# switch statement or expression.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Environment</span><span class="p">.</span><span class="nf">SetEnvironmentVariable</span><span class="p">(</span><span class="s">"EnvironmentName"</span><span class="p">,</span>
+  <span class="p">(</span><span class="n">GitBranch</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">)</span> <span class="k">switch</span>
+  <span class="p">{</span>
+    <span class="p">(</span><span class="s">"main"</span><span class="p">,</span> <span class="s">"Release"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Production"</span><span class="p">,</span>
+    <span class="p">(</span><span class="s">"develop"</span><span class="p">,</span> <span class="s">"Release"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Staging"</span><span class="p">,</span>
+    <span class="n">_</span> <span class="p">=&gt;</span> <span class="s">"Development"</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>While the rest of the team were getting paid more than I was, I admit that I was hired to help them fix problems and help migrate old applications. I love helping and I’m not criticizing the team here, though it might sound like it. I like helping a team that listens.</p>
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmsbuild-git-branch%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Using+A+Git+Branch+In+MSBuild%20http%3A%2F%2Flocalhost%3A4000%2Fmsbuild-git-branch%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fmsbuild-git-branch%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=Using+A+Git+Branch+In+MSBuild&url=http%3A%2F%2Flocalhost%3A4000%2Fmsbuild-git-branch%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+    <a class="page-previous" href="/namecheap-ddns/">
+      <h4 class="page-pagination-label">Previous</h4>
+      <span class="page-pagination-title">
+        <i class="fas fa-arrow-left"></i> Namecheap DDNS
+
+      </span>
+    </a>
+  
+
+  
+    <a class="page-next" href="/data-redaction-replace/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Data Redaction - Replace
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/banner.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>
