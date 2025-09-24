@@ -7,8 +7,8 @@ $(document).ready(function () {
     <div class="mh-banner-content">
         <div class="mh-banner-content-center"><strong>Welcome to one of Matthew's official websites!</strong><br/></div>
         <div class="mh-banner-content-filler-first">&nbsp;</div>
-        <div>
-            <strong>Matthew's Websites</strong><br/
+        <div class="mh-banner-content-col1">
+            <strong>Matthew's Websites</strong><br/>
             <ul>
                 <li><a href="https://matthewhanna.com">Business Website</a></li>
                 <li><a href="https://matthewhanna.net">Resume Website</a></li>
@@ -16,9 +16,9 @@ $(document).ready(function () {
                 <li><a href="https://matthewhanna.me">Personal Blog</a></li>
             </ul>
         </div>
-        <div>&nbsp;</div>
-        <div>
-            <strong>Managed Websites</strong><br/
+        <div class="mh-banner-content-col2">&nbsp;</div>
+        <div class="mh-banner-content-col3">
+            <strong>Managed Websites</strong><br/>
             <ul>
                 <li><a href="https://jhausman.ninja">Jessica Hausman</a></li>
                 <li><a href="https://msgdrinking.ninja">Drinking Giraffe Blog</a></li>
@@ -26,7 +26,7 @@ $(document).ready(function () {
         </div>
         <div class="mh-banner-content-filler-second">&nbsp;</div>
         <div class="mh-banner-content-center">Feel free to explore and learn more about Matthew's work and interests!</div>
-        <div class="mh-banner-content-center"><small>Please note, these websites are hobbies and not constantly maintained due to preferences for working.</small></div>
+        <div class="mh-banner-content-center"><small>Please note, these websites are hobbies and not constantly maintained due to preferences for working.</small><small class="see-grid"> &#128295;</small></div>
         <div class="mh-banner-content-center">&nbsp;</div>
     </div>
 `;

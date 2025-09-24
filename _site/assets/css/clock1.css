@@ -1,17 +1,3 @@
-#clock-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#clock-display {
-    position:relative;
-    width: 120px;
-    height:100px;
-    top:50px;
-    left:58px;
-}
-
 div.dig, div.hour, div.min, div.sec {
     position:absolute;
 }
