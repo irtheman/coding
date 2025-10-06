@@ -2,7 +2,7 @@
 layout: post
 title: 'Using A Git Branch In MSBuild'
 date: 2024-09-23 09:33:00 -0400
-tags: C# Git Drama
+tags: C# git drama
 ---
 ## Project Deployment Challenge
 

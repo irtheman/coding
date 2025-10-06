@@ -16,3 +16,8 @@ You can find the source code for Jekyll at GitHub:
 
 
 [jekyll-organization]: https://github.com/jekyll
+
+<div class="notice" markdown="1">
+#### Note
+This is a note feature built into this template.
+</div>

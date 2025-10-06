@@ -77,4 +77,10 @@ Let's see this come to life!
 
   [example duh]: http://blog.matthewhanna.net "Donky"
   [^1]: This is the footnote.
+
+
+  <div class="notice" markdown="1">
+    #### Note
+    This is a note feature built into this template.
+  </div>
 {:/comment}
