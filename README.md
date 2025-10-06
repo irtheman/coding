@@ -17,3 +17,11 @@ A bash script for replacing private with redacted data, basically hiding informa
 https://blog.matthewhanna.net/namecheap-ddns/
 
 A bash script for maintaining the IP address used for NameCheap DDNS for various domains and subdomains.
+
+## RetryAction
+https://blog.matthewhanna.net/retry-action/
+
+A simple C# example of retrying an action or function with an optional delay.
+
+
+
