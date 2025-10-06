@@ -1,3 +1,6 @@
+using System.Threading.Tasks;
+
+
 /*
 RetryAction(ThisMightFail, 3, 1000);
 */
@@ -10,7 +13,7 @@ Console.WriteLine(res);
 /// <param name="action">Action to perform</param>
 /// <param name="numberOfRetries">Number of retries</param>
 /// <param name="delayMs">Delay between reties. Default is no delay.</param>
-public static void RetryAction(Action action, int numberOfRetries, int delayMs = 0)
+static void RetryAction(Action action, int numberOfRetries, int delayMs = 0)
 {
     Exception? exception = null;
     int retries = 0;
@@ -44,7 +47,7 @@ public static void RetryAction(Action action, int numberOfRetries, int delayMs =
 /// <param name="fn">Function to perform</param>
 /// <param name="numberOfRetries">Number of retries</param>
 /// <param name="delayMs">Delay between reties. Default is no delay.</param>
-public static TResult? RetryAction<TResult>(Func<TResult> fn, int numberOfRetries, int delayMs = 0)
+static TResult? RetryAction<TResult>(Func<TResult> fn, int numberOfRetries, int delayMs = 0)
 {
     Exception? exception = null;
     int retries = 0;
@@ -71,7 +74,7 @@ public static TResult? RetryAction<TResult>(Func<TResult> fn, int numberOfRetrie
     throw exception!;
 }
 
-public static int GetTheNumber(int notAllowed = 1)
+static int GetTheNumber(int notAllowed = 1)
 {
     Console.Write("Enter a number: ");
     var input = int.Parse(Console.ReadLine() ?? "0");
@@ -87,13 +90,13 @@ public static int GetTheNumber(int notAllowed = 1)
 }
 
 /* This is a wrapper so we can pass a parameter */
-public static int ThisMightFail2()
+static int ThisMightFail2()
 {
     return GetTheNumber(3);
 }
 
 /*
-public static void ThisMightFail()
+static void ThisMightFail()
 {
     const int notAllowed = 1;
 
