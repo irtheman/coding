@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--
+    So Simple Jekyll Theme 3.2.0
+    Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/so-simple-theme/blob/master/LICENSE
+-->
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>AI Resume Chat | Software Design Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="AI Resume Chat" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I made my own AI chat application to adjust my resume for every new job I apply for. If, like me, you have been applying for jobs, tailoring your resume multiple times to better fit the job description can get tiring. But aren’t we still unsure how effective it really is? I’m worried what questions the interviewer will ask about on my resume. In today’s crazy competitive job market, making a resume that stands out is important. Tools like Ollama and Langchain offer nice useful AI models and tools that can not only be used to enhance your resume but also to prepare you for interviews. Large Language Models (LLMs) These are tools with which you may have interacted with through ChatGPT, Gemini, Claude or whatever. To use these to update a resume to get a better job we have to instruct, or prompt, them carefully. For me, it is best to make the prompt by role, task, input, and output method. Define the role it is supposed to mimic, define its task in detail, tell what sort of inputs it should expect, and how it should give the results. I’ve decided to take this a step further and develop my own application for my resumes. Setup For this application, I use the Llama3 model from Ollama with python and Langchain. Basically, this application will do these things: Read the job description provided Read your PDF resume Answer your questions based on your job description and resume Suggest modifications to your resume Do a mock interview Instead of only working through the terminal, which I often do, I integrated streamlit into the AI Resume Chat application for an easier user interface. Usage The first entry, the job description, will be a part of the system prompt itself. It is because all of the conversations will be dependent on it. The second entry, a PDF resume, is the next part of the system prompt. RAG gets us the required snippets from the uploaded resume and, based on these, the application can extract relevant parts of the previous chat history which may be required. All of this is provided to the LLM which gives us its insights. The third entry, a drop down, allows the selection of a chat option: Enhanced Resume Simulate Interview Both options have their own prompt, one to help enhance a resume and one to conduct an interview based on the job description and the provided resume. After clicking the Update button the model is loaded with all of the necessary provided information. When the model is ready a new entry appears when the user can ask any questions like “How can I change my resume for this job description?”, “What is wrong with my resume?”, or “Hello! Let’s start the interview please.” If you want to use it then please visit the GitHub repository and apply the directions in the README.md file. All of this assumes you have knowledge of using python. Github AI Resume Chat" />
+<meta property="og:description" content="I made my own AI chat application to adjust my resume for every new job I apply for. If, like me, you have been applying for jobs, tailoring your resume multiple times to better fit the job description can get tiring. But aren’t we still unsure how effective it really is? I’m worried what questions the interviewer will ask about on my resume. In today’s crazy competitive job market, making a resume that stands out is important. Tools like Ollama and Langchain offer nice useful AI models and tools that can not only be used to enhance your resume but also to prepare you for interviews. Large Language Models (LLMs) These are tools with which you may have interacted with through ChatGPT, Gemini, Claude or whatever. To use these to update a resume to get a better job we have to instruct, or prompt, them carefully. For me, it is best to make the prompt by role, task, input, and output method. Define the role it is supposed to mimic, define its task in detail, tell what sort of inputs it should expect, and how it should give the results. I’ve decided to take this a step further and develop my own application for my resumes. Setup For this application, I use the Llama3 model from Ollama with python and Langchain. Basically, this application will do these things: Read the job description provided Read your PDF resume Answer your questions based on your job description and resume Suggest modifications to your resume Do a mock interview Instead of only working through the terminal, which I often do, I integrated streamlit into the AI Resume Chat application for an easier user interface. Usage The first entry, the job description, will be a part of the system prompt itself. It is because all of the conversations will be dependent on it. The second entry, a PDF resume, is the next part of the system prompt. RAG gets us the required snippets from the uploaded resume and, based on these, the application can extract relevant parts of the previous chat history which may be required. All of this is provided to the LLM which gives us its insights. The third entry, a drop down, allows the selection of a chat option: Enhanced Resume Simulate Interview Both options have their own prompt, one to help enhance a resume and one to conduct an interview based on the job description and the provided resume. After clicking the Update button the model is loaded with all of the necessary provided information. When the model is ready a new entry appears when the user can ask any questions like “How can I change my resume for this job description?”, “What is wrong with my resume?”, or “Hello! Let’s start the interview please.” If you want to use it then please visit the GitHub repository and apply the directions in the README.md file. All of this assumes you have knowledge of using python. Github AI Resume Chat" />
+<link rel="canonical" href="http://localhost:4000/ai-resume-chat/" />
+<meta property="og:url" content="http://localhost:4000/ai-resume-chat/" />
+<meta property="og:site_name" content="Software Design Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-02T14:03:25-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="AI Resume Chat" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-12-02T14:03:25-05:00","datePublished":"2025-12-02T14:03:25-05:00","description":"I made my own AI chat application to adjust my resume for every new job I apply for. If, like me, you have been applying for jobs, tailoring your resume multiple times to better fit the job description can get tiring. But aren’t we still unsure how effective it really is? I’m worried what questions the interviewer will ask about on my resume. In today’s crazy competitive job market, making a resume that stands out is important. Tools like Ollama and Langchain offer nice useful AI models and tools that can not only be used to enhance your resume but also to prepare you for interviews. Large Language Models (LLMs) These are tools with which you may have interacted with through ChatGPT, Gemini, Claude or whatever. To use these to update a resume to get a better job we have to instruct, or prompt, them carefully. For me, it is best to make the prompt by role, task, input, and output method. Define the role it is supposed to mimic, define its task in detail, tell what sort of inputs it should expect, and how it should give the results. I’ve decided to take this a step further and develop my own application for my resumes. Setup For this application, I use the Llama3 model from Ollama with python and Langchain. Basically, this application will do these things: Read the job description provided Read your PDF resume Answer your questions based on your job description and resume Suggest modifications to your resume Do a mock interview Instead of only working through the terminal, which I often do, I integrated streamlit into the AI Resume Chat application for an easier user interface. Usage The first entry, the job description, will be a part of the system prompt itself. It is because all of the conversations will be dependent on it. The second entry, a PDF resume, is the next part of the system prompt. RAG gets us the required snippets from the uploaded resume and, based on these, the application can extract relevant parts of the previous chat history which may be required. All of this is provided to the LLM which gives us its insights. The third entry, a drop down, allows the selection of a chat option: Enhanced Resume Simulate Interview Both options have their own prompt, one to help enhance a resume and one to conduct an interview based on the job description and the provided resume. After clicking the Update button the model is loaded with all of the necessary provided information. When the model is ready a new entry appears when the user can ask any questions like “How can I change my resume for this job description?”, “What is wrong with my resume?”, or “Hello! Let’s start the interview please.” If you want to use it then please visit the GitHub repository and apply the directions in the README.md file. All of this assumes you have knowledge of using python. Github AI Resume Chat","headline":"AI Resume Chat","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ai-resume-chat/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/MatthewHanna2.jpg"}},"url":"http://localhost:4000/ai-resume-chat/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/skins/default.css">
+  <link rel="alternate" type="application/atom+xml" title="Software Design Blog" href="/feed.xml">
+<!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+
+<!-- end custom head snippets -->
+
+</head>
+
+
+  <body class="layout--post  ai-resume-chat">
+    <header>&nbsp;</header>
+    
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+  <div class="navigation-wrapper">
+    <a href="#menu-toggle" id="menu-toggle">Menu</a>
+    <nav id="primary-nav" class="site-nav animated drop">
+      <ul><li><a href="/">Home</a></li><li><a href="/posts/">Posts</a></li><li><a href="/categories/">Categories</a></li><li><a href="/tags/">Tags</a></li><li><a href="/search/">Search</a></li><li><a href="https://matthewhanna.net">Resume</a></li><li><a href="https://matthewhanna.com?freelancer">Freelancer</a></li></ul>
+    </nav>
+  </div><!-- /.navigation-wrapper -->
+
+
+    <header class="masthead">
+  <div class="wrap">
+    
+      <a href="/" class="site-logo" rel="home" title="Software Design Blog">
+        <img src="/images/MatthewHanna2.jpg" class="site-logo-img animated fadeInDown" alt="Software Design Blog">
+      </a>
+    
+    
+    
+      
+        <div class="site-title animated fadeIn"><a href="/">Software Design Blog</a></div>
+      
+      <p class="site-description animated fadeIn" itemprop="description">Matthew Hanna's software design blog.</p>
+    
+  </div>
+</header><!-- /.masthead -->
+
+
+    <main id="main" class="main-content" aria-label="Content">
+  <article class="h-entry">
+    
+
+    <div class="page-wrapper">
+      <header class="page-header">
+        
+        
+          <h1 id="page-title" class="page-title p-name">AI Resume Chat
+</h1>
+        
+      </header>
+
+      <div class="page-sidebar">
+        <div class="page-author h-card p-author"><div class="author-info">
+
+<span class="read-time">2 min read</span>
+
+    <time class="page-date dt-published" datetime="2025-12-02T14:03:25-05:00"><a class="u-url" href="">December 2, 2025</a>
+</time>
+
+  </div>
+</div>
+
+        
+
+        
+  <h3 class="page-taxonomies-title">Tags</h3>
+  <ul class="page-taxonomies"><li class="page-taxonomy"><a href="/tags/#python" title="Pages tagged python" rel="tag">python</a></li>
+  </ul>
+
+
+      </div>
+
+      <div id="post-content" class="page-content">
+        <div class="e-content">
+          <p>I made my own AI chat application to adjust my resume for every new job I apply for.</p>
+
+<p>If, like me, you have been applying for jobs, tailoring your resume multiple times to better fit the job description can get tiring. But aren’t we still unsure how effective it really is? I’m worried what questions the interviewer will ask about on my resume.</p>
+
+<p>In today’s crazy competitive job market, making a resume that stands out is important. Tools like Ollama and Langchain offer nice useful AI models and tools that can not only be used to enhance your resume but also to prepare you for interviews.</p>
+
+<h3 id="large-language-models-llms">Large Language Models (LLMs)</h3>
+<p>These are tools with which you may have interacted with through ChatGPT, Gemini, Claude or whatever. To use these to update a resume to get a better job we have to instruct, or prompt, them carefully. For me, it is best to make the prompt by role, task, input, and output method.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Define the role it is supposed to mimic, define its task in detail, tell what sort of inputs it should expect, and how it should give the results.
+</code></pre></div></div>
+
+<p>I’ve decided to take this a step further and develop my own application for my resumes.</p>
+
+<h3 id="setup">Setup</h3>
+
+<p>For this application, I use the Llama3 model from Ollama with python and Langchain. Basically, this application will do these things:</p>
+<ul>
+  <li>Read the job description provided</li>
+  <li>Read your PDF resume</li>
+  <li>Answer your questions based on your job description and resume</li>
+  <li>Suggest modifications to your resume</li>
+  <li>Do a mock interview</li>
+</ul>
+
+<p>Instead of only working through the terminal, which I often do, I integrated streamlit into the AI Resume Chat application for an easier user interface.</p>
+
+<h3 id="usage">Usage</h3>
+<p><img src="/images/resume-ui.png" alt="" /></p>
+
+<p>The first entry, the job description, will be a part of the system prompt itself. It is because all of the conversations will be dependent on it.</p>
+
+<p>The second entry, a PDF resume, is the next part of the system prompt. RAG gets us the required snippets from the uploaded resume and, based on these, the application can extract relevant parts of the previous chat history which may be required. All of this is provided to the LLM which gives us its insights.</p>
+
+<p>The third entry, a drop down, allows the selection of a chat option:</p>
+<ul>
+  <li>Enhanced Resume</li>
+  <li>Simulate Interview
+Both options have their own prompt, one to help enhance a resume and one to conduct an interview based on the job description and the provided resume.</li>
+</ul>
+
+<p>After clicking the Update button the model is loaded with all of the necessary provided information. When the model is ready a new entry appears when the user can ask any questions like “How can I change my resume for this job description?”, “What is wrong with my resume?”, or “Hello! Let’s start the interview please.”</p>
+
+<p>If you want to use it then please visit the GitHub repository and apply the directions in the README.md file. All of this assumes you have knowledge of using python.</p>
+
+<p><a href="https://github.com/irtheman/ollama-ai-resume-chat">Github AI Resume Chat</a></p>
+
+
+        </div>
+
+        
+          <div class="page-share">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fai-resume-chat%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--facebook btn--small"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i> <span>Share</span></a>
+  <a href="https://twitter.com/intent/tweet?text=AI+Resume+Chat%20http%3A%2F%2Flocalhost%3A4000%2Fai-resume-chat%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--twitter btn--small"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i> <span>Tweet</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fai-resume-chat%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--linkedin btn--small"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span></a>
+  <a href="https://reddit.com/submit?title=AI+Resume+Chat&url=http%3A%2F%2Flocalhost%3A4000%2Fai-resume-chat%2F" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" class="btn btn--reddit btn--small"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i> <span>Reddit</span></a>
+</div>
+
+        
+
+        
+          
+
+        
+
+        <nav class="page-pagination" role="navigation">
+  
+
+  
+    <a class="page-next" href="/data-redaction/">
+      <h4 class="page-pagination-label">Next</h4>
+      <span class="page-pagination-title">
+        Data Redaction
+ <i class="fas fa-arrow-right"></i>
+      </span>
+    </a>
+  
+</nav>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+    <footer id="footer" class="site-footer">
+  <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+<div class="social-icons"><a class="social-icon" href="https://github.com/irtheman"><i class="fab fa-github-square fa-2x" title="GitHub"></i></a><a class="social-icon" href="/feed.xml"><i class="fas fa-rss-square fa-2x" title="Feed"></i></a></div><div class="copyright">
+    
+      <p>&copy; 2025 Software Design Blog. Powered by Matthew Hanna.</p>
+    
+  </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.min.js"></script>
+  <script src="/assets/js/banner.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+
+
+  </body>
+
+</html>

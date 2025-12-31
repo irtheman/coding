@@ -25,7 +25,7 @@
   {% unless page.show_excerpts == false %}
     <div class="entry-excerpt p-summary">
       {% if entry.excerpt %}
-        {{ entry.excerpt | markdownify }}
+        {{ entry.excerpt | markdownify | split: "</p>" | first | split: "<p>" | last }}
       {% endif %}
     </div>
   {% endunless %}
