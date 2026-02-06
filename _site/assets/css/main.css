@@ -686,22 +686,3 @@ figure.align-center figcaption { text-align: center; }
 .responsive-embed-4by3::before { padding-top: 75%; }
 
 .responsive-embed-1by1::before { padding-top: 100%; }
-
-:root { --background: #252a34; --banner-color: #aaa; --banner-hover-color: #fff; --banner-link-color: #00adb5; }
-
-.mh-banner { background-color: inherit; color: var(--banner-color); cursor: pointer; width: 100%; border: none; text-align: center; outline: none; font-size: 10px; }
-.mh-banner:hover, .mh-banner .banner-active { color: var(--banner-hover-color); }
-.mh-banner:after { content: '\23f7'; margin-left: 5px; }
-.mh-banner .banner-active:after { content: "\23f6"; }
-
-.mh-banner-content { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5px; padding: 0 18px; max-height: 0; overflow: hidden; font-size: 12px; transition: max-height 0.2s ease-out; }
-.mh-banner-content:has(.see-grid:hover) { padding: 10px; transition-delay: 1s; }
-.mh-banner-content:has(.see-grid:hover) div { border: 1px solid green; }
-.mh-banner-content div.mh-banner-content-center { grid-column: 1 / span 12; text-align: center; }
-.mh-banner-content div.mh-banner-content-filler-first { grid-column: 1 / span 4; }
-.mh-banner-content div.mh-banner-content-col1 { grid-column: 5 / span 2; }
-.mh-banner-content div.mh-banner-content-col2 { grid-column: 7; }
-.mh-banner-content div.mh-banner-content-col3 { grid-column: 8 / span 2; }
-.mh-banner-content div.mh-banner-content-filler-second { grid-column: 10 / span 3; }
-.mh-banner-content a { color: var(--banner-link-color); text-decoration: none; }
-.mh-banner-content a:hover { filter: brightness(110%); text-decoration: underline; }
