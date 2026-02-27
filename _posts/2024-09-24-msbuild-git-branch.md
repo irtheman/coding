@@ -79,3 +79,5 @@ Environment.SetEnvironmentVariable("EnvironmentName",
 ```
 
 While the rest of the team were getting paid more than I was, I admit that I was hired to help them fix problems and help migrate old applications. I love helping and I’m not criticizing the team here, though it might sound like it. I like helping a team that listens.
+
+[Github Repo](https://github.com/irtheman/coding)
