@@ -53,7 +53,7 @@ cursor=0
 draw_menu() {
     clear
     echo "--- WOL MANAGER ---"
-    echo "Select nics to ENABLE WoL. Unselected will be DISABLED."
+    echo "Select NICs to ENABLE WoL. Unselected will be DISABLED."
     echo "------------------------------------------------------------"
     echo "Controls: [W/S] Up/Down, [SPACE] Toggle, [ENTER] Apply & Save"
     echo "------------------------------------------------------------"
@@ -69,14 +69,14 @@ draw_menu() {
         else
             symbol="[ ] DISABLE"
         fi
-        
+
         echo "$prefix $symbol ${nics[$i]}  (Current: ${current_status[$i]})"
     done
     echo "------------------------------------------------------------"
 }
 
 # Interaction loop
-while "$1" != "-a"; do
+while [ "$1" != "-a" ]; do
     draw_menu
     IFS= read -rsn1 key
     case "$key" in
