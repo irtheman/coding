@@ -27,7 +27,7 @@ https://blog.matthewhanna.net/namecheap-ddns/
 A bash script for maintaining the IP address used for NameCheap DDNS for various domains and subdomains.
 
 ## AsyncRetry
-https://blog.matthewhanna.net/retry-action/
+https://blog.matthewhanna.net/retry-action-async/
 
 A simple C# example of an async retry for an action or function with an optional delay.
 
