@@ -4,12 +4,12 @@ Various coding projects for demo purposes
 Please take a look at my associated blog at https://blog.matthewhanna.net
 
 ## wol-manager.sh
-https://blog.matthewhanna.net/data-redaction-search/
+https://blog.matthewhanna.net/wol-manager/
 
 A bash script for enabling WOL as a visual manager.  
-A -a parameter will skip the menu portion and enable all NICs for WOL.  
-i.e. wol-manager.sh --- Shows NICs with a menu for selecting which ones will be enabled for WOL  
-     wol-manager.sh -a --- Enables all NICs for WOL
+A -a parameter will skip the menu portion and enable all NICs for WOL. i.e.   
+- wol-manager.sh --- Shows NICs with a menu for selecting which ones will be enabled for WOL  
+- wol-manager.sh -a --- Enables all NICs for WOL
 
 ## search.sh
 https://blog.matthewhanna.net/data-redaction-search/
